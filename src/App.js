@@ -3,6 +3,7 @@ import "./style.css";
 import NavigationBar from "./components/NavigationBar";
 import Content from "./components/Content";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
     <NavigationBar></NavigationBar>
     <Header></Header>
     <Content></Content>
-    
+    <Footer></Footer>
     
     </>
   );
