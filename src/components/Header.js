@@ -12,7 +12,7 @@ const Header = () => {
                     <h1 className="medical"> Medical </h1>
                     <h1> Services That You Can Trust</h1>
                 </div>
-                <div className="text-center">
+                <div className="text-center mb-3">
                     <button className="apnt1">Get Appointment</button>
                     <button className="lrn">Learn more</button>
                 </div>
