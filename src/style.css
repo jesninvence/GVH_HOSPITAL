@@ -10,21 +10,24 @@
 } */
 
 .wallpaper {
-  position: absolute;
-  filter: blur(0px);
+  filter: blur(10px);
   -webkit-filter: blur(3px);
   z-index: -1;
-  top: 0;
-}
-
-.header {
   display: flex;
   position: relative;
   text-align: center;
-  height: 110vh;
   align-items: center;
   flex-direction: column;
 }
+
+.header .content {
+  position: absolute;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 
 .sgnup {
   background-color: #1E90FF;
@@ -257,4 +260,117 @@
   background-color: white;
   margin-bottom: 1rem;
   border-radius: 20px;
+}
+
+
+#footer {
+  font-family: D-DIN,Open Sans,Noto Sans Japanese,Noto Sans TC,sans-serif;
+}
+
+#footer h4 {
+  font-weight: 400;
+}
+
+#footer .links {
+  padding: 5rem 0;
+  background: rgb(239, 239, 239);
+}
+
+#footer a {
+  text-decoration: none;
+  margin: .4rem 0;
+  color: gray;
+}
+
+#footer .socials a {
+  font-size: 1.5rem;
+  background: rgb(239, 239, 239);
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin:0.5rem  .4rem;
+}
+
+#footer .socials a i {
+
+}
+
+#signin {
+  font-family: 'Poppins',sans-serif;
+}
+
+#signin form {
+  animation: wip .5s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+  color: gray;
+}
+
+@keyframes wip {
+  to {
+    opacity: 1;
+  }
+}
+
+#signin form select {
+  padding: .5rem 2.5rem .5rem .5rem;
+  margin-right: 1rem;
+  appearance: none;
+  position: relative;
+  color: inherit;
+}
+
+#signin form .selects > div {
+  display: inline-block;
+  position: relative;
+}
+
+#signin form .selects > div::after {
+  position: absolute;
+  content:"";
+  width: .8rem;
+  height: .5rem;
+  background-color: gray;
+  top: 50%;
+  right: 10%;
+  transform: translate(-100%,-50%);
+  clip-path: polygon(0 0,50% 100%,100% 0);
+}
+
+#signin .formBars > div.currFormPos {
+  color: black;
+  border-left: 2.5px solid blue;
+}
+
+#signin .formBars > div {
+  border-left: 1px solid gray;
+}
+
+#createdAccountSuccess {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index:9991;
+  display: none;
+}
+
+#createdAccountSuccess > div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: 500px;
+  width: 100%;
+  background: white;
+  transform: translate(-50%,-50%);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
 }

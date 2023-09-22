@@ -7,6 +7,9 @@ import Expertise from "./components/Expertise";
 import MeetOurDoctos from "./components/MeetOurDoctors";
 import AboutUs from "./components/AboutUs";
 import Info from "./components/Info";
+import Footer from "./components/Footer";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Doctors from "./pages/Doctors";
 
@@ -32,7 +35,10 @@ function App() {
             <Info></Info>
           </>
         }></Route>
+        <Route path="/signup" element={<Signup/>}></Route>
+        <Route path="/login" element={<Login/>}></Route>
       </Routes>
+      <Footer></Footer>
     </BrowserRouter>
     
     </>
