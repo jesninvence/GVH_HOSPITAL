@@ -13,8 +13,8 @@ const Header = () => {
                     <h1> Services That You Can Trust</h1>
                 </div>
                 <div className="text-center mb-3">
-                    <button className="apnt1">Get Appointment</button>
-                    <button className="lrn">Learn more</button>
+                    {/* <button className="apnt1">Get Appointment</button> */}
+                    {/* <button className="lrn">Learn more</button> */}
                 </div>
                 <div className="searchBar">
                     <input type="text" placeholder="Search.."/><FontAwesomeIcon icon={faMagnifyingGlass} style={{position: "absolute", right: "1rem", top: "50%", transform: "translateY(-50%)", color: "white"}}/>
