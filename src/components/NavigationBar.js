@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from 'react';
+import {Link} from "react-router-dom";
 
 const NavigationBar = () => {
     return ( 
@@ -29,7 +30,14 @@ const NavigationBar = () => {
                         <a className="btn btn-black text-end text-black" href="">login</a>
                     </li> */}
                 </ul>
-                <button className="sgnup">Sign-up</button>
+                <div>
+                    <Link to="/signup">
+                        <button className="sgnup">Sign-up</button>
+                    </Link>
+                    <Link to="/login">
+                        <button className="sgnup" style={{background:"white",color:"blue",border:"2px solid blue"}}>Log-in</button>
+                    </Link>
+                </div>
             </div>
         </nav>
         </>
