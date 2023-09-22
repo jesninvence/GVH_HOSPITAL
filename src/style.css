@@ -10,23 +10,26 @@
 } */
 
 .wallpaper {
-  filter: blur(10px);
-  -webkit-filter: blur(3px);
-  z-index: -1;
-  display: flex;
-  position: relative;
-  text-align: center;
-  align-items: center;
-  flex-direction: column;
+    filter: blur(10px);
+    -webkit-filter: blur(3px);
+    z-index: -1;
 }
-
-.header .content {
-  position: absolute;
-  display: flex;
-  text-align: center;
-  align-items: center;
-  flex-direction: column;
-}
+  
+  .header {
+    display: flex;
+    position: relative;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .header .content {
+    position: absolute;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+  }
 
 
 .sgnup {
