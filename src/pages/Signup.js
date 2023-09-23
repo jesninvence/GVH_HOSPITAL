@@ -105,15 +105,23 @@ function UserProfile({inputData,setData,updateCurrent}) {
     const submitForm = function(event) {
         event.preventDefault();
         let data = new FormData(event.target);
+        let errorDisplay = document.querySelector(".formError");
     
         if (data.get("password") != data.get("confirmPassword")) {
-            document.querySelector(".formError").innerHTML = "Error : Password And Confirm Password are not the same.";
+           errorDisplay.innerHTML = "Error : Password And Confirm Password are not the same.";
         } else {
-            for (let [key,value] of data.entries()) {
-                if (!(key == "confirmPassword"))
-                    inputData.set(key,value);
-            }
-            updateCurrent();
+            let email = new FormData();
+            email.append("email",data.get('email'));
+            axios.post('http://localhost/GVH_PHP/email_exist.php',email)
+            .then(response => {
+                if (response.data == "") {
+                    for (let [key,value] of data.entries()) {
+                        if (!(key == "confirmPassword"))
+                            inputData.set(key,value);
+                    }
+                    updateCurrent();
+                } else errorDisplay.innerHTML = "Error : Email Already Exist!";
+            })
         }
     }
 

@@ -302,7 +302,7 @@
 
 }
 
-#signin {
+#signin,#login {
   font-family: 'Poppins',sans-serif;
 }
 
@@ -325,6 +325,7 @@
   appearance: none;
   position: relative;
   color: inherit;
+  border: 1px solid gray;
 }
 
 #signin form .selects > div {
@@ -376,4 +377,16 @@
   display: flex;
   justify-content: center;
   padding: 2rem 0;
+}
+
+#login input {
+  outline: none;
+}
+
+#login input[type="checkbox"] ~ span {
+  display: none;
+}
+
+#login input[type="checkbox"]:checked ~ span{
+  display: flex;
 }

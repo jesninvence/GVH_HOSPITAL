@@ -12,7 +12,9 @@ const NavigationBar = () => {
                     </section>
                     <ul className="navbar-nav text-center">
                         <li className="nav-item">
-                            <a className="nav-link text-black md" href="">Home</a>
+                            <Link className="nav-link text-black md" to="/">
+                                Home
+                            </Link>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link text-black" href="">Services</a>
