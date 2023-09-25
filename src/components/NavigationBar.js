@@ -1,8 +1,29 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React from 'react';
+import {React, useState , useEffect} from 'react';
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 const NavigationBar = () => {
+    let [logged,setLogged] = useState(false);
+
+    let cru = localStorage.getItem("cru");
+    useEffect(
+        () => {
+            if (cru) {
+                let sc = localStorage.getItem("sc");
+                let data = new FormData();
+                data.append("cru",cru);
+                data.append("sc",sc);
+
+                axios.post("http://localhost/GVH_PHP/get_user.php",data)
+                .then(response => {
+                    let result = response.data;
+                    if (typeof result == "object") setLogged(true);
+                });
+            } 
+        },[]
+    );
+
     return ( 
         <>
             <nav className="navbar navbar-expand-lg bg-white sticky-bottom">
@@ -28,17 +49,26 @@ const NavigationBar = () => {
                         <li className="nav-item">
                             <a className="nav-link text-black" href="">About Us</a>
                         </li>
-                        {/* <li className="nav-item">
-                            <a className="btn btn-black text-end text-black" href="">login</a>
-                        </li> */}
                     </ul>
                     <div>
-                        <Link to="/signup">
-                            <button className="sgnup">Sign-up</button>
-                        </Link>
-                        <Link to="/login">
-                            <button className="sgnup" style={{background:"white",color:"blue",border:"2px solid blue"}}>Log-in</button>
-                        </Link>
+                        {
+                            logged ? 
+                                <Link to="/user" className="d-flex align-items-center gap-2 ">
+                                    <p className="m-0">Hello User!</p>
+                                    <div style={{display:"inline-block",width:"2.5rem",height:"2.5rem",border:"1px solid black",borderRadius:"50%"}}>
+
+                                    </div>
+                                </Link>
+                                :
+                                <>
+                                    <Link to="/signup">
+                                        <button className="sgnup">Sign-up</button>
+                                    </Link>
+                                    <Link to="/login">
+                                        <button className="sgnup" style={{background:"white",color:"blue",border:"2px solid blue"}}>Log-in</button>
+                                    </Link>
+                                </>
+                        }   
                     </div>
                 </div>
             </nav>

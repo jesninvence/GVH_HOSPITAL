@@ -10,6 +10,46 @@ const Login = () => {
     const [currForm,setCurrForm] = useState(0);
     const forms = [useRef(),useRef()];
 
+    let emailInput = useRef();
+    let passwordInput = useRef();
+    let rememberInput = useRef();
+
+    let cru = localStorage.getItem("cru");
+    let ru = localStorage.getItem("ru");
+
+    useEffect(
+        () => {
+            let sc = localStorage.getItem("sc");
+            if (cru) {
+                let data = new FormData();
+                data.append("cru",cru);
+                data.append("sc",sc);
+
+                axios.post("http://localhost/GVH_PHP/get_user.php",data)
+                .then(response => {
+                    let result = response.data;
+                    if (typeof result == "object" && loggedLink.current) loggedLink.current.click(); 
+                });
+            } 
+
+            if (ru) {
+                let data = new FormData();
+                data.append("cru",ru);
+                data.append("sc",sc);
+
+                axios.post("http://localhost/GVH_PHP/get_user.php",data)
+                .then(response => {
+                    let result = response.data;
+                    if (typeof result == "object") {
+                        emailInput.current.value = result.email;
+                        passwordInput.current.value = result.password;
+                        rememberInput.current.checked = true;
+                    } 
+                });
+            }
+        },[]
+    );
+
     const signin = function(event) {
         event.preventDefault();
         const data = new FormData(event.target);
@@ -17,21 +57,21 @@ const Login = () => {
         axios.post(`http://localhost/GVH_PHP/login.php`,data)
         .then(response => {
             let result = response.data;
-            console.log(result);
-            if (result == "Provide Email!") {
-                
-            }
             if (result == "" || !result) console.log("NO ACCOUNT FOUND!");
             else {
-              /*   loggedLink.current.click(); */
+                if (data.get("remember") == "on") localStorage.setItem("ru",result.cru);
+                else localStorage.removeItem("ru");
+
+                localStorage.setItem("cru",result.cru);
+                localStorage.setItem("sc",result.sc);
+                loggedLink.current.click();
             }
         });
     }
 
-    const changeForm = function(event) {
-        event.preventDefault();
+    const changeForm = function(formNum) {
         forms[currForm].current.classList.add("d-none");
-        setCurrForm(1);
+        setCurrForm(formNum);
     }
 
     const resetPassword = function(event) {
@@ -58,22 +98,22 @@ const Login = () => {
                             <form method="GET" onSubmit={signin} style={{marginTop:"9rem",color:"#FBFEFF"}} className="d-flex flex-column align-items-center">
                                 <h3 style={{color:"#0E9BD3"}}>USER LOGIN</h3>
                                 <div style={{width:"17rem"}} className="mb-4 mt-3">
-                                    <input style={{background:"#B6DFEF",borderRadius:"50px"}} className="py-2 pe-5 ps-4 w-100" type="text" name="email" placeholder="email" />
+                                    <input style={{background:"#B6DFEF",borderRadius:"50px"}} className="py-2 pe-5 ps-4 w-100" type="text" name="email" placeholder="email" required ref={emailInput}/>
                                 </div>
                                 <div style={{width:"17rem"}} className="mb-3">
-                                    <input style={{background:"#B6DFEF",borderRadius:"50px"}} className="py-2 pe-5 ps-4" type="text" name="password" placeholder="password"/> 
+                                    <input style={{background:"#B6DFEF",borderRadius:"50px"}} className="py-2 pe-5 ps-4" type="text" name="password" placeholder="password" required ref={passwordInput}/> 
                                 </div>
                                 <div className="d-flex justify-content-between" style={{fontSize:".8rem",width:"17rem"}}>
                                     <div style={{color:"gray",display:"flex",alignItems:"center",gap:".3rem"}}>
                                         <label style={{position:"relative",display:"inline-block",width:"1rem",height:"1rem",border:"1px solid blue",borderRadius:"50%",cursor:"pointer"}}>
-                                            <input className="d-none" type="checkbox" />
+                                            <input className="d-none" type="checkbox" name="remember" ref={rememberInput} />
                                             <span style={{position:"absolute",top:"-20%",justifyContent:"center",alignItems:"center",fontSize:"1.2rem"}}>
                                                 <FontAwesomeIcon icon={faCheck} />
                                             </span>
+                                            <div style={{display:"inline-block",width:"6rem",transform:"translateX(20%)"}}>Remember me</div>
                                         </label>
-                                        Remember me
                                     </div>
-                                    <a style={{color:"gray",textDecoration:"none"}} href="#" onClick={changeForm}>Forgot password?</a>
+                                    <a style={{color:"gray",textDecoration:"none"}} href="#" onClick={event =>{event.preventDefault();changeForm(1)}}>Forgot password?</a>
                                 </div>
                                 <input type="submit" value="LOGIN" className="px-5 py-2 mt-4" style={{background:"linear-gradient(to left,#3C53AC,#B6DFEF)",borderRadius:"50px"}}/>
                             </form>
@@ -91,10 +131,11 @@ const Login = () => {
                                     We will send you an email that will allow you to reset your password.
                                 </p>
                                 <input type="submit" value="RESET PASSWORD" className="px-5 py-2 mt-2" style={{background:"linear-gradient(to left,#3C53AC,#B6DFEF)",borderRadius:"50px"}}/>
+                                <Link className="mt-3" to="/login" onClick={() => changeForm(0)}>Login</Link>
                             </form>
                         </div>
                     </div>
-                    <Link to="/" ref={loggedLink}></Link>
+                    <Link to="/user" ref={loggedLink}></Link>
                 </div>
             </div>
         </>
