@@ -20,7 +20,7 @@ const Expertise = () => {
                 <div className="row">
                     <div className="col-6 g-3">
                         <div className="card">
-                            <img src={doctors} className="card-img" alt="" />
+                            <img src={doctors} className="card-img" alt="" style={{height:"27rem"}}/>
                             <div className="card-img-overlay">
                                 <h3 className="card-title">Expert Doctors</h3>
                             </div>
@@ -29,7 +29,7 @@ const Expertise = () => {
                     <br />
                     <div className="col-6 g-3">
                         <div className="card">
-                            <img src={care} className="card-img" alt="" style={{height: "23rem"}}/>
+                            <img src={care} className="card-img" alt="" style={{height:"27rem"}}/>
                             <div className="card-img-overlay">
                                 <h3 className="card-title">Emergency and Critical Care</h3>
                             </div>
@@ -37,7 +37,7 @@ const Expertise = () => {
                     </div>
                     <div className="col-6 g-3">
                         <div className="card">
-                            <img src={facilities} className="card-img" alt="" style={{height: "23rem"}}/>
+                            <img src={facilities} className="card-img" alt="" style={{height:"27rem"}}/>
                             <div className="card-img-overlay">
                                 <h3 className="card-title">State-of-the-art Facilities</h3>
                             </div>
@@ -45,7 +45,7 @@ const Expertise = () => {
                     </div>
                     <div className="col-6 g-3">
                         <div className="card">
-                            <img src={program} className="card-img" alt="" />
+                            <img src={program} className="card-img" alt="" style={{height:"27rem"}}/>
                             <div className="card-img-overlay">
                                 <h3 className="card-title">Training Programs</h3>
                             </div>

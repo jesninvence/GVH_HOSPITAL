@@ -10,7 +10,6 @@ import Info from "./components/Info";
 import Footer from "./components/Footer";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Doctors from "./pages/Doctors";
 import Profile1 from "./pages/Profile1";
 import HospitalService from "./pages/HospitalService";
@@ -70,85 +69,118 @@ import StaffNurse from "./pages/StaffNurse";
 import Midwife from "./pages/Midwife";
 import BusinessPis from "./pages/BusinessPis";
 import Doctors2 from "./pages/Doctors2";
+import { BrowserRouter, Routes, Route , Navigate} from "react-router-dom";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import {DashMain , DashDoctors , DashPatients , DashAppointments , DashQueue , DashPharmacy , DashInventory , DashLaboratory , DashInbox , DashChat , DashLogout , DashDoctorAdd} from "./pages/Dashboard/Contents";
+import Book from "./pages/Book";
+import Resetpassword from "./pages/Resetpassword";
+import Loader from "./components/Loader";
 
 function App() {
   return (
     <>
     <BrowserRouter>
-      <NavigationBar></NavigationBar>
       <Routes>
-        <Route path="/drservices" element={<><HospitalService></HospitalService></>}></Route>
-        <Route path="/doctor" element={<><Doctors></Doctors></>}></Route>
-        <Route path="/laboratory" element={<><Laboratory></Laboratory></>}></Route>
-        <Route path="/profile1" element={<><Profile1></Profile1></>}></Route>
-        <Route path="/renalunit" element={<><RenalUnit></RenalUnit></>}></Route>
-        <Route path="/radiology" element={<><Radiology></Radiology></>}></Route>
-        <Route path="/emergency" element={<><EmergencyAc></EmergencyAc></>}></Route>
-        <Route path="/heartins" element={<><HeartIns></HeartIns></>}></Route>
-        <Route path="/cancercent" element={<><CancerCenter></CancerCenter></>}></Route>
-        <Route path="/healthunit" element={<><HealthUnit></HealthUnit></>}></Route>
-        <Route path="/sleepdis" element={<><SleepDisorder></SleepDisorder></>}></Route>
-        <Route path="/eyeins" element={<><EyeInstitute></EyeInstitute></>}></Route>
-        <Route path="/foodservices" element={<><FoodServices></FoodServices></>}></Route>
-        <Route path="/neurophy" element={<><Neurophy></Neurophy></>}></Route>
-        <Route path="/nursing" element={<><NursingServices></NursingServices></>}></Route>
-        <Route path="/pharmacy" element={<><Pharmacy></Pharmacy></>}></Route>
-        <Route path="/wellness" element={<><WellnessCenter></WellnessCenter></>}></Route>
-        <Route path="/endoscopy" element={<><Endoscopy></Endoscopy></>}></Route>
-        <Route path="/admission" element={<><AdmissionProcedure></AdmissionProcedure></>}></Route>
-        <Route path="/discharge" element={<><Discharge></Discharge></>}></Route>
-        <Route path="/advance" element={<><Advance></Advance></>}></Route>
-        <Route path="/medical" element={<><Medical></Medical></>}></Route>
-        <Route path="/patientrights" element={<><PatientRights></PatientRights></>}></Route>
-        <Route path="/pharmacyinfo" element={<><PharmacyInfo></PharmacyInfo></>}></Route>
-        <Route path="/pricelist" element={<><Pricelist></Pricelist></>}></Route>
-        <Route path="/visitation" element={<><Visitation></Visitation></>}></Route>
-        <Route path="/others" element={<><Others></Others></>}></Route>
-        <Route path="/carrers" element={<><Carrers></Carrers></>}></Route>
-        <Route path="/finance" element={<><Finance></Finance></>}></Route>
-        <Route path="/general" element={<><General></General></>}></Route>
-        <Route path="/humanres" element={<><HumanRes></HumanRes></>}></Route>
-        <Route path="/infortech" element={<><InforTech></InforTech></>}></Route>
-        <Route path="/nursingser" element={<><NursingSer></NursingSer></>}></Route>
-        <Route path="/operational" element={<><Operational></Operational></>}></Route>
-        <Route path="/internal" element={<><Internal></Internal></>}></Route>
-        <Route path="/recidency" element={<><Residency></Residency></>}></Route>
-        <Route path="/fellowship" element={<><Fellowship></Fellowship></>}></Route>
-        <Route path="/respithera" element={<><RespiratoryTherapist></RespiratoryTherapist></>}></Route>
-        <Route path="/radiologic" element={<><Radiologic></Radiologic></>}></Route>
-        <Route path="/pharmacist" element={<><Pharmacist></Pharmacist></>}></Route>
-        <Route path="/medtech" element={<><Medtech></Medtech></>}></Route>
-        <Route path="/hemaphar" element={<><HemaPhar></HemaPhar></>}></Route>
-        <Route path="/dietician" element={<><Dietician></Dietician></>}></Route>
-        <Route path="/clinicalphar" element={<><ClinicalPhar></ClinicalPhar></>}></Route>
-        <Route path="/financeana" element={<><FinanceAnalyst></FinanceAnalyst></>}></Route>
-        <Route path="/billingspe" element={<><BillingSpecialist></BillingSpecialist></>}></Route>
-        <Route path="/securityoff" element={<><SecurityOfficer></SecurityOfficer></>}></Route>
-        <Route path="/hrspecialist" element={<><HrSpecialist></HrSpecialist></>}></Route>
-        <Route path="/systemdev" element={<><SystemDev></SystemDev></>}></Route>
-        <Route path="/clientsupport" element={<><ClientSupport></ClientSupport></>}></Route>
-        <Route path="/networkinf" element={<><Networkinf></Networkinf></>}></Route>
-        <Route path="/businessanalyst" element={<><BusinessSystem></BusinessSystem></>}></Route>
-        <Route path="/riskspecialist" element={<><RiskSpecialist></RiskSpecialist></>}></Route>
-        <Route path="/surgicalass" element={<><SurgicalAssistant></SurgicalAssistant></>}></Route>
-        <Route path="/staffnurse" element={<><StaffNurse></StaffNurse></>}></Route>
-        <Route path="/midwife" element={<><Midwife></Midwife></>}></Route>
-        <Route path="/bpis" element={<><BusinessPis></BusinessPis></>}></Route>
-        <Route path="/doctors2" element={<><Doctors2></Doctors2></>}></Route>
+        <Route path="/drservices" element={<> <NavigationBar></NavigationBar><HospitalService></HospitalService><Footer></Footer></>}></Route>
+        <Route path="/doctor" element={<> <NavigationBar></NavigationBar><Doctors></Doctors><Footer></Footer></>}></Route>
+        <Route path="/laboratory" element={<> <NavigationBar></NavigationBar><Laboratory></Laboratory><Footer></Footer></>}></Route>
+        <Route path="/profile1" element={<> <NavigationBar></NavigationBar><Profile1></Profile1><Footer></Footer></>}></Route>
+        <Route path="/renalunit" element={<> <NavigationBar></NavigationBar><RenalUnit></RenalUnit><Footer></Footer></>}></Route>
+        <Route path="/radiology" element={<> <NavigationBar></NavigationBar><Radiology></Radiology><Footer></Footer></>}></Route>
+        <Route path="/emergency" element={<> <NavigationBar></NavigationBar><EmergencyAc></EmergencyAc><Footer></Footer></>}></Route>
+        <Route path="/heartins" element={<> <NavigationBar></NavigationBar><HeartIns></HeartIns><Footer></Footer></>}></Route>
+        <Route path="/cancercent" element={<> <NavigationBar></NavigationBar><CancerCenter></CancerCenter><Footer></Footer></>}></Route>
+        <Route path="/healthunit" element={<> <NavigationBar></NavigationBar><HealthUnit></HealthUnit><Footer></Footer></>}></Route>
+        <Route path="/sleepdis" element={<> <NavigationBar></NavigationBar><SleepDisorder></SleepDisorder><Footer></Footer></>}></Route>
+        <Route path="/eyeins" element={<> <NavigationBar></NavigationBar><EyeInstitute></EyeInstitute><Footer></Footer></>}></Route>
+        <Route path="/foodservices" element={<> <NavigationBar></NavigationBar><FoodServices></FoodServices><Footer></Footer></>}></Route>
+        <Route path="/neurophy" element={<> <NavigationBar></NavigationBar><Neurophy></Neurophy><Footer></Footer></>}></Route>
+        <Route path="/nursing" element={<> <NavigationBar></NavigationBar><NursingServices></NursingServices><Footer></Footer></>}></Route>
+        <Route path="/pharmacy" element={<> <NavigationBar></NavigationBar><Pharmacy></Pharmacy><Footer></Footer></>}></Route>
+        <Route path="/wellness" element={<> <NavigationBar></NavigationBar><WellnessCenter></WellnessCenter><Footer></Footer></>}></Route>
+        <Route path="/endoscopy" element={<> <NavigationBar></NavigationBar><Endoscopy></Endoscopy><Footer></Footer></>}></Route>
+        <Route path="/admission" element={<> <NavigationBar></NavigationBar><AdmissionProcedure></AdmissionProcedure><Footer></Footer></>}></Route>
+        <Route path="/discharge" element={<> <NavigationBar></NavigationBar><Discharge></Discharge><Footer></Footer></>}></Route>
+        <Route path="/advance" element={<> <NavigationBar></NavigationBar><Advance></Advance><Footer></Footer></>}></Route>
+        <Route path="/medical" element={<> <NavigationBar></NavigationBar><Medical></Medical><Footer></Footer></>}></Route>
+        <Route path="/patientrights" element={<> <NavigationBar></NavigationBar><PatientRights></PatientRights><Footer></Footer></>}></Route>
+        <Route path="/pharmacyinfo" element={<> <NavigationBar></NavigationBar><PharmacyInfo></PharmacyInfo><Footer></Footer></>}></Route>
+        <Route path="/pricelist" element={<> <NavigationBar></NavigationBar><Pricelist></Pricelist><Footer></Footer></>}></Route>
+        <Route path="/visitation" element={<> <NavigationBar></NavigationBar><Visitation></Visitation><Footer></Footer></>}></Route>
+        <Route path="/others" element={<> <NavigationBar></NavigationBar><Others></Others><Footer></Footer></>}></Route>
+        <Route path="/carrers" element={<> <NavigationBar></NavigationBar><Carrers></Carrers><Footer></Footer></>}></Route>
+        <Route path="/finance" element={<> <NavigationBar></NavigationBar><Finance></Finance><Footer></Footer></>}></Route>
+        <Route path="/general" element={<> <NavigationBar></NavigationBar><General></General><Footer></Footer></>}></Route>
+        <Route path="/humanres" element={<> <NavigationBar></NavigationBar><HumanRes></HumanRes><Footer></Footer></>}></Route>
+        <Route path="/infortech" element={<> <NavigationBar></NavigationBar><InforTech></InforTech><Footer></Footer></>}></Route>
+        <Route path="/nursingser" element={<> <NavigationBar></NavigationBar><NursingSer></NursingSer><Footer></Footer></>}></Route>
+        <Route path="/operational" element={<> <NavigationBar></NavigationBar><Operational></Operational><Footer></Footer></>}></Route>
+        <Route path="/internal" element={<> <NavigationBar></NavigationBar><Internal></Internal><Footer></Footer></>}></Route>
+        <Route path="/recidency" element={<> <NavigationBar></NavigationBar><Residency></Residency><Footer></Footer></>}></Route>
+        <Route path="/fellowship" element={<> <NavigationBar></NavigationBar><Fellowship></Fellowship><Footer></Footer></>}></Route>
+        <Route path="/respithera" element={<> <NavigationBar></NavigationBar><RespiratoryTherapist></RespiratoryTherapist><Footer></Footer></>}></Route>
+        <Route path="/radiologic" element={<> <NavigationBar></NavigationBar><Radiologic></Radiologic><Footer></Footer></>}></Route>
+        <Route path="/pharmacist" element={<> <NavigationBar></NavigationBar><Pharmacist></Pharmacist><Footer></Footer></>}></Route>
+        <Route path="/medtech" element={<> <NavigationBar></NavigationBar><Medtech></Medtech><Footer></Footer></>}></Route>
+        <Route path="/hemaphar" element={<> <NavigationBar></NavigationBar><HemaPhar></HemaPhar><Footer></Footer></>}></Route>
+        <Route path="/dietician" element={<> <NavigationBar></NavigationBar><Dietician></Dietician><Footer></Footer></>}></Route>
+        <Route path="/clinicalphar" element={<> <NavigationBar></NavigationBar><ClinicalPhar></ClinicalPhar><Footer></Footer></>}></Route>
+        <Route path="/financeana" element={<> <NavigationBar></NavigationBar><FinanceAnalyst></FinanceAnalyst><Footer></Footer></>}></Route>
+        <Route path="/billingspe" element={<> <NavigationBar></NavigationBar><BillingSpecialist></BillingSpecialist><Footer></Footer></>}></Route>
+        <Route path="/securityoff" element={<> <NavigationBar></NavigationBar><SecurityOfficer></SecurityOfficer><Footer></Footer></>}></Route>
+        <Route path="/hrspecialist" element={<> <NavigationBar></NavigationBar><HrSpecialist></HrSpecialist><Footer></Footer></>}></Route>
+        <Route path="/systemdev" element={<> <NavigationBar></NavigationBar><SystemDev></SystemDev><Footer></Footer></>}></Route>
+        <Route path="/clientsupport" element={<> <NavigationBar></NavigationBar><ClientSupport></ClientSupport><Footer></Footer></>}></Route>
+        <Route path="/networkinf" element={<> <NavigationBar></NavigationBar><Networkinf></Networkinf><Footer></Footer></>}></Route>
+        <Route path="/businessanalyst" element={<> <NavigationBar></NavigationBar><BusinessSystem></BusinessSystem><Footer></Footer></>}></Route>
+        <Route path="/riskspecialist" element={<> <NavigationBar></NavigationBar><RiskSpecialist></RiskSpecialist><Footer></Footer></>}></Route>
+        <Route path="/surgicalass" element={<> <NavigationBar></NavigationBar><SurgicalAssistant></SurgicalAssistant><Footer></Footer></>}></Route>
+        <Route path="/staffnurse" element={<> <NavigationBar></NavigationBar><StaffNurse></StaffNurse><Footer></Footer></>}></Route>
+        <Route path="/midwife" element={<> <NavigationBar></NavigationBar><Midwife></Midwife><Footer></Footer></>}></Route>
+        <Route path="/bpis" element={<> <NavigationBar></NavigationBar><BusinessPis></BusinessPis><Footer></Footer></>}></Route>
+        <Route path="/doctors2" element={<> <NavigationBar></NavigationBar><Doctors2></Doctors2><Footer></Footer></>}></Route>
         <Route path="/" element={
           <>
+             <NavigationBar></NavigationBar>
             <Header></Header>
             <Services></Services>
             <Expertise></Expertise>
             <MeetOurDoctos></MeetOurDoctos>
             <AboutUs></AboutUs>
             <Info></Info>
+            <Footer></Footer>
           </>
         }></Route>
-        <Route path="/signup" element={<Signup/>}></Route>
-        <Route path="/login" element={<Login/>}></Route>
+        <Route path="/signup" element={
+          <>
+             <NavigationBar></NavigationBar>
+            <Signup/>
+            <Footer></Footer>
+          </>
+        }></Route>
+        <Route path="/login" element={
+          <>
+             <NavigationBar></NavigationBar>
+            <Login/>
+            <Footer></Footer>
+          </>
+        }></Route>
+        <Route path="/user" element={<Dashboard content={<DashMain></DashMain>}></Dashboard>}></Route>
+        <Route path="/user/doctors" element={<Dashboard content={<DashDoctors></DashDoctors>}></Dashboard>}></Route>
+        <Route path="/user/patients" element={<Dashboard content={<DashPatients></DashPatients>}></Dashboard>}></Route>
+        <Route path="/user/appointments" element={<Dashboard content={<DashAppointments></DashAppointments>}></Dashboard>}></Route>
+        <Route path="/user/queue" element={<Dashboard content={<DashQueue></DashQueue>}></Dashboard>}></Route>
+        <Route path="/user/pharmacy" element={<Dashboard content={<DashPharmacy></DashPharmacy>}></Dashboard>}></Route>
+        <Route path="/user/inventory" element={<Dashboard content={<DashInventory></DashInventory>}></Dashboard>}></Route>
+        <Route path="/user/laboratory" element={<Dashboard content={<DashLaboratory></DashLaboratory>}></Dashboard>}></Route>
+        <Route path="/user/inbox" element={<Dashboard content={<DashInbox></DashInbox>}></Dashboard>}></Route>
+        <Route path="/user/chat" element={<Dashboard content={<DashChat></DashChat>}></Dashboard>}></Route>
+        <Route path="/user/doctors/add" element={<Dashboard content={<DashDoctorAdd></DashDoctorAdd>}></Dashboard>}></Route>
+        <Route path="/user/logout" element={<DashLogout></DashLogout>}></Route>
+        <Route path="/book" element={<Book></Book>}></Route>
+        <Route path="/resetpassword" element={<Resetpassword></Resetpassword>}></Route>
       </Routes>
-      <Footer></Footer>
+      {/* <Loader></Loader> */}
     </BrowserRouter>
     
     </>

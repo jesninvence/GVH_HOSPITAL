@@ -9,8 +9,33 @@ import doctorf3 from "../images/doctorf3.webp";
 import doctorf4 from "../images/doctorf4.jpg";
 import doctorm1 from "../images/doctorm1.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+import { useEffect , useState } from "react";
 
 const Doctors = () => {
+    const [doctors,setDoctors] = useState([]);
+
+    useEffect(() => {
+        axios.get("http://localhost/GVH_PHP/get_doctors.php")
+        .then(response => {
+            if (typeof response.data == "object") {
+                let results = response.data;
+                results.forEach(result => {
+                    const data = new FormData();
+                    data.append("id",result.specialty_id);
+                    axios.post("http://localhost/GVH_PHP/get_specialties.php",data)
+                    .then(response => { 
+                        if (typeof response.data == "object") {
+                            result["specialty_name"] = response.data.name;
+                            setDoctors(results);
+                        }
+                    })
+                });
+            }
+            
+        })
+    },[]);
+
     return ( 
         <>
             <div className="container">
@@ -75,7 +100,7 @@ const Doctors = () => {
             <br/>
             <div className="container">
                 <div className="doctors">
-                    <div className="row g-0 position-relative">
+                    {/* <div className="row g-0 position-relative">
                         <div className="col-md-4 mb-md-0">
                             <img src={pdtric} alt="" width="50%"/>
                         </div>
@@ -202,7 +227,29 @@ const Doctors = () => {
                             <br />
                             <button className="cntct">BOOK</button>
                         </div>
-                    </div>
+                    </div> */}
+                    {
+                        doctors.map(doctor => {
+                            return (
+                                <div className="row g-0 position-relative">
+                                    <div className="col-md-4 mb-md-0">
+                                        <img src={doctor.profile_image} alt="" width="50%"/>
+                                    </div>
+                                    <div className="col-md-7 p-4 ps-md-0">
+                                        <h5 className="mt-0">Dr. {`${doctor.firstname} ${doctor.lastname}`}</h5>
+                                        <p>{doctor['specialty_name']}</p>
+                                        <p>{doctor.experience} yrs experience</p>
+                                        <p>Site: GVH Medical Hospital</p>
+                                        <button className="book">VIEW PROFILE</button>
+                                        <br />
+                                        <Link to={"/book?doctor_id=" + doctor.doctor_id}>
+                                            <button className="cntct">BOOK</button>
+                                        </Link>
+                                    </div>
+                                </div>
+                            );
+                        })
+                    }
                 </div>
             </div>
             <div className="container">
