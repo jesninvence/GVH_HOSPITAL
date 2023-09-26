@@ -69,6 +69,7 @@ import SurgicalAssistant from "./pages/SurgicalAssistant";
 import StaffNurse from "./pages/StaffNurse";
 import Midwife from "./pages/Midwife";
 import BusinessPis from "./pages/BusinessPis";
+import Doctors2 from "./pages/Doctors2";
 
 function App() {
   return (
@@ -133,6 +134,7 @@ function App() {
         <Route path="/staffnurse" element={<><StaffNurse></StaffNurse></>}></Route>
         <Route path="/midwife" element={<><Midwife></Midwife></>}></Route>
         <Route path="/bpis" element={<><BusinessPis></BusinessPis></>}></Route>
+        <Route path="/doctors2" element={<><Doctors2></Doctors2></>}></Route>
         <Route path="/" element={
           <>
             <Header></Header>

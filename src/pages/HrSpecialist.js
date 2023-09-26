@@ -9,42 +9,42 @@ const HrSpecialist = () => {
             </div>
             <br />
             <div className="carrers d-flex position-relative m-2">
-                <div className="flex-shrink-0 me-3">
+                <div className="flex-shrink-0">
                     <Link to="/carrers">
                         <a href="">Medical Ancillary Services</a>
                     </Link>
                 </div>
-                <div className="flex-shrink-0 me-3">
+                <div className="flex-shrink-0">
                     <Link to="/finance">
                         <a href="">Finance</a>
                     </Link>
                 </div>
-                <div className="flex-shrink-0 me-3">
+                <div className="flex-shrink-0">
                     <Link to="/general">
                         <a href="">General Services</a>
                     </Link>
                 </div>
-                <div className="flex-shrink-0 me-3">
+                <div className="flex-shrink-0">
                     <Link to="/humanres">
-                        <a href="" style={{backgroundColor: "#0073ff", color: "white", padding: "10px 5px"}}>Human Resources</a>
+                        <a href="" style={{backgroundColor: "#0073ff", color: "white"}}>Human Resources</a>
                     </Link>
                 </div>
-                <div className="flex-shrink-0 me-3">
+                <div className="flex-shrink-0">
                     <Link to="/infortech">
                         <a href="">Information Technology</a>
                     </Link>
                 </div>
-                <div className="flex-shrink-0 me-3">
+                <div className="flex-shrink-0">
                     <Link to="/internal">
                         <a href="">Internal Audit</a>
                     </Link>
                 </div>
-                <div className="flex-shrink-0 me-3">
+                <div className="flex-shrink-0">
                     <Link to="/nursingser">
                         <a href="">Nursing Services Office</a>
                     </Link>
                 </div>
-                <div className="flex-shrink-0 me-3">
+                <div className="flex-shrink-0">
                     <Link to="/operational">
                         <a href="">Operational Excellence</a>
                     </Link>

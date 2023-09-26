@@ -140,15 +140,6 @@
 /**************Dropdown Link***********************/
 
 .dropbtn {
-  /* background-color: transparent;
-  color: black;
-  text-decoration: none;
-  position: relative;
-  letter-spacing: 1.7px;
-  padding: 0 !important;
-  margin: 0px 10px;
-  font-size: 15px;
-  font-family: 'Poppins',sans-serif; */
   position: relative;
   text-decoration: none;
   font-family: 'Poppins',sans-serif;
@@ -174,13 +165,16 @@
 }
 
 .dropdown-content a {
+  text-decoration: none;
+}
+
+.dropdown-content a a {
   color: black;
   padding: 12px 20px;
-  text-decoration: none;
   display: block;
 }
 
-.dropdown-content a:hover {
+.dropdown-content a a:hover {
   background-color: #1E90FF;
   color: white;
 }
@@ -508,20 +502,30 @@
   display: flex;
   flex: 1;
   width: 100%;
+  align-items: center;
 }
 
-.carrers a{
+.carrers div > a a{
   text-decoration: none;
   color: black;
   width: 100%;
-  padding: 0px 5px;
+  padding: 10px 9.5px;
 }
 
-.carrers a:hover {
+.carrers div > a a:not(.mas):hover {
   background-color: #0073ff;
   color: white;
   text-decoration: none;
-  padding: 10px 5px;
+  padding: 10px 9.5px;
+}
+
+.carrers a {
+  text-decoration: none;
+}
+
+.carrers {
+  display: flex;
+  gap: 0.3rem;
 }
 
 .container .carrer-link a{
