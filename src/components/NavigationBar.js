@@ -5,6 +5,8 @@ import axios from "axios";
 
 const NavigationBar = () => {
     let [logged,setLogged] = useState(false);
+    const [profileImage,setProfileImage] = useState('');
+    const [name,setName] = useState('User');
 
     let cru = localStorage.getItem("cru");
     useEffect(
@@ -18,7 +20,12 @@ const NavigationBar = () => {
                 axios.post("http://localhost/GVH_PHP/get_user.php",data)
                 .then(response => {
                     let result = response.data;
-                    if (typeof result == "object") setLogged(true);
+                    if (typeof result == "object") {
+                        setLogged(true);
+                        setProfileImage(result.profile_image);
+                        if (result.firstname && result.lastname)
+                            setName(`${result.firstname} ${result.lastname}`);
+                    }
                 });
             } 
         },[]
@@ -27,7 +34,7 @@ const NavigationBar = () => {
     return ( 
         <>
             <nav className="navbar navbar-expand-lg bg-white sticky-bottom">
-                <div className="container-fluid">
+                <div className="container-fluid px-5">
                     <section className="logo">
                         <h1>LOGO</h1>
                     </section>
@@ -54,9 +61,9 @@ const NavigationBar = () => {
                         {
                             logged ? 
                                 <Link to="/user" className="d-flex align-items-center gap-2 ">
-                                    <p className="m-0">Hello User!</p>
-                                    <div style={{display:"inline-block",width:"2.5rem",height:"2.5rem",border:"1px solid black",borderRadius:"50%"}}>
-
+                                    <p className="m-0">Hello , {name}!</p>
+                                    <div style={{display:"inline-block",width:"2.5rem",height:"2.5rem",border:"1px solid gray",borderRadius:"50%",overflow:"hidden"}}>
+                                        <img src={profileImage} />
                                     </div>
                                 </Link>
                                 :

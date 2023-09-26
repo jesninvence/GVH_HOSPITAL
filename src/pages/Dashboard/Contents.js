@@ -1,12 +1,13 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState , useRef} from "react";
 import { Navigate, Link , useNavigate } from "react-router-dom";
 import { getUserType } from "../../components/GetUser";
 
 
-function allow_user(user_type,callback) {
+function allow_user(user_type,not,callback) {
+    
     getUserType().then(type => {
-        if (type != user_type) callback();
+        if ((type != user_type && !not) || (type == user_type && not)) callback();
     })
 }
 
@@ -30,7 +31,7 @@ export const DashDoctors = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        allow_user(1,() => navigate("/user"));
+        allow_user(1,false,() => navigate("/user"));
     },[]);
 
     return (
@@ -44,7 +45,7 @@ export const DashPatients = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        allow_user(1,() => navigate("/user"));
+        allow_user(1,false,() => navigate("/user"));
     },[]);
 
     return (
@@ -54,28 +55,106 @@ export const DashPatients = () => {
     );
 }
 export const DashAppointments = () => {
+    const [appointments,setAppointments] = useState([]);
+    const [actions,setActions] = useState(false);
+
+    useEffect(() => {
+        getUserType().then(type => {
+            let data = new FormData();
+            data.append("function",1);
+            if (type != 1) {
+                const cru = localStorage.getItem("cru");
+                data.append("id",cru);
+                data.append("specific",true);
+                data.append("type",type == 2 ? "doctor" : "patient");
+            } else setActions(true);
+        
+            axios.post("http://localhost/GVH_PHP/appointments.php",data)
+            .then(response => {
+                if (typeof response.data == "object")
+                    setAppointments(response.data);
+            });
+        });
+    },[]);
+
+    const doneAppointment = (id) => {
+        let data = new FormData();
+        data.append("id",id);
+        data.append("function",2);
+        axios.post("http://localhost/GVH_PHP/appointments.php",data)
+        .then(response => {
+            if (response.data == "") window.location.reload(); 
+        });
+    }
+
     return (
         <>
-            <h1>Dash Appointments Goes Brr..</h1>
+            <h1>Appointments</h1>
+            <div className="card">
+                <div className="card-body">
+                    <table className="appoint-tb">
+                        <thead>
+                            <tr>
+                                <th>DOCTOR</th>
+                                <th>PATIENT</th>
+                                <th>APPOINTED DATE</th>
+                            </tr>
+                        </thead>                                            
+                        <tbody>
+                            {appointments.map(appointment => {
+                                let {id,doctor_id,patient_id,appointed_date} = appointment;
+                                return (
+                                    <tr>
+                                        <td>{doctor_id}</td>
+                                        <td>{patient_id}</td>
+                                        <td>{appointed_date}</td>
+                                        {
+                                            actions ?
+                                                <td>
+                                                    <button className="btn btn-success" onClick={() => doneAppointment(id)}>Done</button>
+                                                </td>
+                                                :
+                                                <></>
+                                        }
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </>
     );
 }
 export const DashQueue = () => {
     const navigate = useNavigate();
     const [queues,setQueues] = useState([]);
+    const [actions,setActions] = useState(false);
 
     useEffect(() => {
-        allow_user(1,() => navigate("/user"));
-        axios.get("http://localhost/GVH_PHP/queue.php")
-        .then(response => {
-            if (typeof response.data == "object") setQueues(response.data);
+        allow_user(2,true,() => navigate("/user"));
+        
+        getUserType().then(type => {
+            let data = new FormData();
+            data.append("function",3);
+            if (type != 1) {
+                let cru = localStorage.getItem("cru");
+                data.append("id",cru);
+                data.append("type",type == 2 ? "doctor" : "patient");
+            } else setActions(true);
+            axios.post("http://localhost/GVH_PHP/queue.php",data)
+            .then(response => {
+                if (typeof response.data == "object") setQueues(response.data);
+            });
         });
+
     },[]);
 
     const acceptAppointment = function(id,accept) {
         const data = new FormData();
         data.append("id",id);
         data.append("accept",accept);
+        data.append("function",2);
 
         axios.post("http://localhost/GVH_PHP/queue.php",data)
         .then(response => {
@@ -83,11 +162,24 @@ export const DashQueue = () => {
         });
     }
 
+    const cancelAppointment = function(id) {
+        const data = new FormData();
+        data.append("id",id);
+        data.append("function",4);
+
+        axios.post("http://localhost/GVH_PHP/queue.php",data)
+        .then(response => {
+            if (response.data == "") window.location.reload();
+            console.log(response);
+        });
+    }
+
     return (
         <>
+            <h1>QUEUE</h1>
             <div className="card">
                 <div className="card-body">
-                    <table id="appointment_queues">
+                    <table className="appoint-tb">
                         <thead>
                             <tr>
                                 <th>DOCTOR</th>
@@ -104,11 +196,18 @@ export const DashQueue = () => {
                                         <td>{doctor_id}</td>
                                         <td>{patient_id}</td>
                                         <td>{appointed_date}</td>
-                                        <td>{request_date}</td>
-                                        <td>
-                                            <button className="btn btn-success me-2" onClick={() => acceptAppointment(id,true)}>ACCEPT</button>
-                                            <button className="btn btn-danger" onClick={() => acceptAppointment(id,false)}>DECLINE</button>
-                                        </td>
+                                        <td>{request_date}</td>     
+                                        {
+                                            actions ?
+                                                <td>
+                                                    <button className="btn btn-success me-2" onClick={() => acceptAppointment(id,true)}>ACCEPT</button>
+                                                    <button className="btn btn-danger" onClick={() => acceptAppointment(id,false)}>DECLINE</button>
+                                                </td>
+                                                :
+                                                <td>
+                                                    <button className="btn btn-danger" onClick={() => cancelAppointment(id)}>CANCEL</button>
+                                                </td>
+                                        }                                
                                     </tr>
                                 );
                             })}
@@ -123,7 +222,7 @@ export const DashPharmacy = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        allow_user(1,() => navigate("/user"));
+        allow_user(1,false,() => navigate("/user"));
     },[]);
 
     return (
@@ -136,7 +235,7 @@ export const DashInventory = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        allow_user(1,() => navigate("/user"));
+        allow_user(1,false,() => navigate("/user"));
     },[]);
 
     return (
@@ -149,7 +248,7 @@ export const DashLaboratory = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        allow_user(1,() => navigate("/user"));
+        allow_user(1,false,() => navigate("/user"));
     },[]);
 
     return (
@@ -159,9 +258,56 @@ export const DashLaboratory = () => {
     );
 }
 export const DashInbox = () => {
+    let [inboxes,setInboxes] = useState([]);
+    useEffect(() => {
+        let cru = localStorage.getItem("cru");
+        let data = new FormData();
+        data.append("function",1);
+        data.append("id",cru);
+        axios.post("http://localhost/GVH_PHP/inboxes.php",data)
+        .then(response => {
+            if (typeof response.data == "object") setInboxes(response.data.reverse());
+        });
+    },[]);
+    
+    const markAsRead = function(id) {
+        let data = new FormData();
+        data.append("id",id);
+        data.append("function",2);
+        axios.post("http://localhost/GVH_PHP/inboxes.php",data)
+        .then(response => {
+            console.log(response)
+            if (response.data == "") window.location.reload();
+        });
+    }
+
     return (
         <>
-            <h1>Dash Inbox Goes Brr..</h1>
+            <h1>Inbox</h1>
+            <div className="container-fluid">
+                {
+                    inboxes.map(inbox => {
+                        return (
+                            <div className="card">
+                                <div style={{fontWeight : inbox.viewed > 0 ? "300" : "600"}} className="card-body">
+                                    <div className="row">
+                                        <div className="col-10">
+                                            <div>
+                                                <span className="text-secondary" style={{fontSize:".9rem"}}>{inbox.datetime_received}</span>
+                                            </div>
+                                            {inbox.message}
+                                        </div>
+                                        <div className="col-2 align-self-center">
+                                            <button style={{fontSize: "300",textDecoration:"underline"}} onClick={() => markAsRead(inbox.id)}>Mark as read</button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        );
+                    })
+                }
+            </div>
         </>
     );
 }
@@ -177,7 +323,7 @@ export const DashDoctorAdd = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        allow_user(1,() => navigate("/user"));
+        allow_user(1,false,() => navigate("/user"));
     },[]);
 
 
@@ -277,7 +423,8 @@ export const DashDoctorAdd = () => {
                             );
                         })
                     }
-                </select>
+                </select> <br/>
+                Experience <input type="number" name="experience"/>
                 <input type="hidden" name="user_type" value="2" />
                 <input type="submit" value="create doctor" className="border"/>
             </form>

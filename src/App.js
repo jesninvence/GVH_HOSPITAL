@@ -14,6 +14,9 @@ import { BrowserRouter, Routes, Route , Navigate} from "react-router-dom";
 import Doctors from "./pages/Doctors";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import {DashMain , DashDoctors , DashPatients , DashAppointments , DashQueue , DashPharmacy , DashInventory , DashLaboratory , DashInbox , DashChat , DashLogout , DashDoctorAdd} from "./pages/Dashboard/Contents";
+import Book from "./pages/Book";
+import Resetpassword from "./pages/Resetpassword";
+import Loader from "./components/Loader";
 
 function App() {
   return (
@@ -21,7 +24,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/doctor" element={
-        <> 
+          <> 
           <NavigationBar></NavigationBar>
           <Doctors></Doctors>
           <Footer></Footer>
@@ -36,7 +39,7 @@ function App() {
             <MeetOurDoctos></MeetOurDoctos>
             <AboutUs></AboutUs>
             <Info></Info>
-            <Footer></Footer>
+            <Footer></Footer>            
           </>
         }></Route>
         <Route path="/signup" element={
@@ -65,7 +68,10 @@ function App() {
         <Route path="/user/chat" element={<Dashboard content={<DashChat></DashChat>}></Dashboard>}></Route>
         <Route path="/user/doctors/add" element={<Dashboard content={<DashDoctorAdd></DashDoctorAdd>}></Dashboard>}></Route>
         <Route path="/user/logout" element={<DashLogout></DashLogout>}></Route>
+        <Route path="/book" element={<Book></Book>}></Route>
+        <Route path="/resetpassword" element={<Resetpassword></Resetpassword>}></Route>
       </Routes>
+      {/* <Loader></Loader> */}
     </BrowserRouter>
     </>
   );

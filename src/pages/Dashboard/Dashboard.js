@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell , faHouse , faUserDoctor , faUserGroup , faCalendar , faPrescriptionBottle , faBox , faFilter , faInbox , faMessage , faMagnifyingGlass , faRightFromBracket , faUser} from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import Doctor5 from "../../images/doctor5.webp";
 import { useEffect, useRef , useState } from "react";
+import axios from "axios";
 import { getUserType } from "../../components/GetUser";
 
 
@@ -51,6 +51,7 @@ const Dashboard = ({content}) => {
                         setAvailableLinks([
                             ["Profile",faUser],
                             ["Appointments",faCalendar],
+                            ["Queue",faUserGroup],
                             ["Inbox",faInbox],
                             ["Chat",faMessage],
                             ["Logout",faRightFromBracket]
@@ -81,6 +82,20 @@ const Dashboard = ({content}) => {
 }
 
 function NavigationBar() {
+    const [profileImage,setProfileImage] = useState('');
+    useEffect(() => {
+        let cru = localStorage.getItem("cru");
+        let sc = localStorage.getItem("sc");    
+        let data = new FormData();
+        data.append("cru",cru);
+        data.append("sc",sc);
+        axios.post("http://localhost/GVH_PHP/get_user.php",data)
+        .then(response => {
+            if (typeof response.data == "object") {
+                setProfileImage(response.data['profile_image']);
+            } 
+        });
+    },[]);
     return (
         <>
             <div className="d-flex justify-content-between py-4">
@@ -97,7 +112,7 @@ function NavigationBar() {
                     <a><FontAwesomeIcon style={{fontSize:"1.2rem"}} icon={faBell} /></a>
                     <button>
                         <div style={{width:"2.5rem",height:"2.5rem",border:"1px solid rgba(0,0,0,0.5)",borderRadius:"50%",overflow:"hidden"}}>
-                            <img src={Doctor5} />
+                            <img src={profileImage} />
                         </div>
                     </button>
                 </div>

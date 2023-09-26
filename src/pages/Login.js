@@ -9,6 +9,7 @@ const Login = () => {
     const loggedLink = useRef();
     const [currForm,setCurrForm] = useState(0);
     const forms = [useRef(),useRef()];
+    const errorMessage = useRef();
 
     let emailInput = useRef();
     let passwordInput = useRef();
@@ -16,6 +17,8 @@ const Login = () => {
 
     let cru = localStorage.getItem("cru");
     let ru = localStorage.getItem("ru");
+
+    let hEMId = null;
 
     useEffect(
         () => {
@@ -28,11 +31,11 @@ const Login = () => {
                 axios.post("http://localhost/GVH_PHP/get_user.php",data)
                 .then(response => {
                     let result = response.data;
-                    if (typeof result == "object" && loggedLink.current) loggedLink.current.click(); 
+                    if (typeof result == "object" && loggedLink.current) {
+                        loggedLink.current.click();
+                    } 
                 });
-            } 
-
-            if (ru) {
+            } else if (ru) {
                 let data = new FormData();
                 data.append("cru",ru);
                 data.append("sc",sc);
@@ -57,8 +60,14 @@ const Login = () => {
         axios.post(`http://localhost/GVH_PHP/login.php`,data)
         .then(response => {
             let result = response.data;
-            if (result == "" || !result) console.log("NO ACCOUNT FOUND!");
-            else {
+            if (result == "" || !result) {
+                errorMessage.current.classList.remove("d-none");
+                if (hEMId) clearTimeout(hEMId);
+                hEMId = setTimeout(() => {
+                    errorMessage.current.classList.add("d-none");
+                },2000);
+                
+            } else {
                 if (data.get("remember") == "on") localStorage.setItem("ru",result.cru);
                 else localStorage.removeItem("ru");
 
@@ -96,7 +105,8 @@ const Login = () => {
                         </div>
                         <div ref={forms[0]} className="col-6 bg-white d-none">
                             <form method="GET" onSubmit={signin} style={{marginTop:"9rem",color:"#FBFEFF"}} className="d-flex flex-column align-items-center">
-                                <h3 style={{color:"#0E9BD3"}}>USER LOGIN</h3>
+                                <h3 style={{color:"#0E9BD3"}} className="m-0 p-0">USER LOGIN</h3>
+                                <p className="text-danger m-0 d-none" ref={errorMessage}>username or password is not valid!</p>
                                 <div style={{width:"17rem"}} className="mb-4 mt-3">
                                     <input style={{background:"#B6DFEF",borderRadius:"50px"}} className="py-2 pe-5 ps-4 w-100" type="text" name="email" placeholder="email" required ref={emailInput}/>
                                 </div>

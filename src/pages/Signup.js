@@ -305,7 +305,10 @@ function UploadDocuments({inputData,setData,createAccount}) {
                 <h3 style={{marginTop:".5rem"}}>Upload Document</h3>
                 <hr />
                 <form onSubmit={submitForm} ref={setData}>
-                    
+                    <div className="form-group">
+                        <label>Image</label>
+                        <input type="file" />
+                    </div>
                 </form>
             </div>
         </>
