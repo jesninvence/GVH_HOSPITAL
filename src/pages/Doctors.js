@@ -2,23 +2,60 @@ import pdtric from "../images/pediatric1.jpg";
 import pdtric1 from "../images/pediatirc.avif";
 import doctor1 from "../images/doctor12.webp";
 import doctor2 from "../images/doctor9.avif";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Doctors = () => {
     return ( 
         <>
             <div className="container">
-                <div>
-                    <label htmlFor="">Doctors</label>
-                    <input type="text" />
+                <div className="fndDoctors">
+                    <label htmlFor="">Search</label>
+                    <br/>
+                    <input type="text" placeholder="Doctor's Name"/>
                 </div>
-                <div>
+                <div className="category">
+                    <label htmlFor="">Specialties</label>
+                    <br/>
                     <select name="" id="">
-                        <option value="">Surgery</option>
+                        <option value="">All</option>
+                        <option value="">Anesthesiology</option>
+                        <option value="">Family and Community ...</option>
+                        <option value="">Internal Medicine</option>
+                        <option value=""> -Cardiology</option>
+                        <option value=""> -Dermatology</option>
+                        <option value=""> -Endocrinology</option>
+                        <option value=""> -Gastroenterology</option>
+                        <option value=""> -Hematology</option>
+                        <option value=""> -Infectious Diseases</option>
+                        <option value=""> -Nephrology</option>
+                        <option value=""> -Neurology</option>
+                        <option value=""> -Oncology</option>
+                        <option value=""> -Pulmonary and Critical...</option>
+                        <option value=""> -Rehabilitation Medicine</option>
+                        <option value=""> -Rheumatology</option>
+                        <option value="">Obstetrics & Gynecology</option>
+                        <option value="">Ophthalmology</option>
+                        <option value="">Orthopedics</option>
+                        <option value="">Pathology</option>
                         <option value="">Pediatrics</option>
+                        <option value="">Radiology</option>
                         <option value="">Surgery</option>
-                        <option value="">Pediatrics</option>
-                        <option value="">Surgery</option>
-                        <option value="">Pediatrics</option>
+                        <option value=""> -Breast Surgery</option>
+                        <option value=""> -Cardiovascular Surgery</option>
+                        <option value=""> -Colorectal Surgery</option>
+                        <option value=""> -Dentistry</option>
+                        <option value=""> -General Surgery</option>
+                        <option value=""> -Hepatobiliary Surgery</option>
+                        <option value=""> -Minimally Invasive Surgery</option>
+                        <option value=""> -Neurosurgery</option>
+                        <option value=""> -Otorhinolaryngology ...</option>
+                        <option value=""> -Pediatric Surgery</option>
+                        <option value=""> -Plastic & Reconstructive ...</option>
+                        <option value=""> -Surgical-Oncology</option>
+                        <option value=""> -Thoracic Surgery</option>
+                        <option value=""> -Transplant & Vascular ...</option>
+                        <option value=""> -Urology</option>
                     </select>
                 </div>
             </div>
@@ -33,7 +70,9 @@ const Doctors = () => {
                             <p>MD - Pediatrics, Lactation Consultant, Pediatrics - Adolescent, Pediatrics - Ambulatory</p>
                             <p>7 yrs experience</p>
                             <p>Site: GVH Medical Hospital</p>
-                            <button className="book">VIEW PROFILE</button>
+                            <Link to="/profile1">
+                                <button className="book">VIEW PROFILE</button>
+                            </Link>
                             <br />
                             <button className="cntct">BOOK</button>
                         </div>

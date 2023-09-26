@@ -7,6 +7,7 @@ const AboutUs = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-6 g-3">
+                        <br /><br />
                         <div className="z-3 position-absolute p-5 rounded-3 box"><span></span></div>
                         <div className="z-3 position-absolute p-3 rounded-3"><span><img src={hospital} alt="" width="100%" /></span></div>
                     </div>

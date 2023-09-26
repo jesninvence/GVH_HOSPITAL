@@ -75,7 +75,7 @@ const Footer = () => {
                         </a>
                     </div>
                     <div style={{color:"gray"}}>
-                        Copyright &copy; 2023 by NowServing All Rights Reserved.
+                        Copyright &copy; 2023 by GVH Medicla Services All Rights Reserved.
                     </div>
                 </div>
             </div>

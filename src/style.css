@@ -99,11 +99,13 @@
   transition: 0.7s; 
 }
 
+/**********Nav-bar***************/
+
 .navbar-nav li a {
     position: relative;
     text-decoration: none;
     font-family: 'Poppins',sans-serif;
-    color: white;
+    color: black;
     font-size: 15px;
     letter-spacing: 1.7px;
     padding: 0 !important;
@@ -125,13 +127,74 @@
     transition: 0.3s;
   }
   
-  .navbar-nav li a:hover {
+  /* .navbar-nav li a:hover {
     color: #ffffff;
-  }
+  } */
   
   .navbar-nav li a:hover:after {
     width: 100%;
   }
+
+/**************End of Nav-bar*********************/
+
+/**************Dropdown Link***********************/
+
+.dropbtn {
+  /* background-color: transparent;
+  color: black;
+  text-decoration: none;
+  position: relative;
+  letter-spacing: 1.7px;
+  padding: 0 !important;
+  margin: 0px 10px;
+  font-size: 15px;
+  font-family: 'Poppins',sans-serif; */
+  position: relative;
+  text-decoration: none;
+  font-family: 'Poppins',sans-serif;
+  color: black;
+  font-size: 15px;
+  letter-spacing: 1.7px;
+  padding: 0 !important;
+  margin: 0px 10px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 20px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #1E90FF;
+  color: white;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: none;
+}
+
+/****************End of Dropdown**************************/
+
 
 .text {
   display: flex;
@@ -204,17 +267,19 @@
 }
 
 .more {
-  background-color: transparent;
-  color: #42a0ff;
-  box-shadow: 0 0 0 2px #42a0ff;
+  background-color: #42a0ff;
+  color: white;
+  /* box-shadow: 0 0 0 2px #42a0ff; */
   font-weight: 500;
   font-size: larger;
   padding: 10px 25px;
+  border-radius: 50px;
 }
 
 .more:hover {
-  background-color: #42a0ff;
-  color: white;
+  background-color: transparent;
+  box-shadow: 0 0 0 2px #42a0ff;
+  color: #42a0ff;
   transition: 0.7s;
 }
 
@@ -285,6 +350,10 @@
   color: gray;
 }
 
+#footer a:hover {
+  color: #42a0ff;
+}
+
 #footer .socials a {
   font-size: 1.5rem;
   background: rgb(239, 239, 239);
@@ -296,6 +365,11 @@
   justify-content: center;
   align-items: center;
   margin:0.5rem  .4rem;
+}
+
+#footer .socials a:hover {
+  background-color: #1E90FF;
+  color: white;
 }
 
 #footer .socials a i {
@@ -377,3 +451,88 @@
   justify-content: center;
   padding: 2rem 0;
 }
+
+/****************Doctors.js*******************/
+
+.container .fndDoctors input {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px 27px;
+  margin-bottom: 1rem;
+}
+
+.container .category select {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.book:hover {
+  background-color: transparent;
+  box-shadow: 0px 0px 0px 1px blue;
+  color: blue;
+  transition: 0.7s;
+}
+
+.cntct:hover {
+  background-color: #0073ff;
+  color: white;
+  transition: 0.5s;
+}
+
+/*********************Profile.js***************/
+
+
+.container .profile1 .card {
+  box-shadow: 0px 0px 15px rgb(186, 186, 186);
+}
+
+/****************Pricelist.js**************/
+
+.container .pcbtn button {
+  padding: 3px 30px;
+}
+.container .pcbtn button:hover {
+  background-color: #1E90FF;
+  color: white;
+}
+
+.container .pcbtn .active {
+  background-color: #1E90FF;
+  color: white;
+}
+
+/*****************Carrers.js********************/
+
+#snd-nav {
+  display: flex;
+  flex: 1;
+  width: 100%;
+}
+
+.carrers a{
+  text-decoration: none;
+  color: black;
+  width: 100%;
+  padding: 0px 5px;
+}
+
+.carrers a:hover {
+  background-color: #0073ff;
+  color: white;
+  text-decoration: none;
+  padding: 10px 5px;
+}
+
+.container .carrer-link a{
+  text-decoration: none;
+  color: black;
+  padding: 10px 10px;
+}
+
+.container .carrer-link a:hover {
+  background-color: #0073ff;
+  color: white;
+  padding: 10px 10px;
+}
+

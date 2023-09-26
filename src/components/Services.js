@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 const Services = () => {
     return ( 
         <>
+            <br/>
             <div className="container">
                 <div className="row">
                     <div className="col-12">
@@ -24,7 +25,9 @@ const Services = () => {
                                 </p>
                             </div>
                             <div className="col-4 text-end align-self-center">
-                                <button className="more">See All</button>
+                                <Link to="/drservices">
+                                    <button className="more">See All</button>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -44,67 +47,81 @@ const Services = () => {
                         </Link>
                     </div>
                     <div className="col-3 g-3">
-                        <div className="card srvcs">
-                            <br />
-                            <FontAwesomeIcon icon={faFlaskVial} className="icon"/>
-                            <div className="card-body">
-                                <h5>Laboratory Services</h5>
+                        <Link to="/laboratory" style={{textDecoration: "none"}}>
+                            <div className="card srvcs">
+                                <br />
+                                <FontAwesomeIcon icon={faFlaskVial} className="icon"/>
+                                <div className="card-body">
+                                    <h5>Laboratory Services</h5>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     </div>
                     <div className="col-3 g-3">
-                        <div className="card srvcs">
-                            <br />
-                            <FontAwesomeIcon icon={faLungs} className="icon"/>
-                            <div className="card-body">
-                                <h5>Renal Unit</h5>
+                        <Link to="/renalunit" style={{textDecoration: "none"}}>
+                            <div className="card srvcs">
+                                <br />
+                                <FontAwesomeIcon icon={faLungs} className="icon"/>
+                                <div className="card-body">
+                                    <h5>Renal Unit</h5>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     </div>
                     <div className="col-3 g-3">
-                        <div className="card srvcs">
-                            <br />
-                            <FontAwesomeIcon icon={faXRay} className="icon"/>
-                            <div className="card-body">
-                                <h5>Radiology</h5>
+                        <Link to="/radiology" style={{textDecoration: "none"}}>
+                            <div className="card srvcs">
+                                <br />
+                                <FontAwesomeIcon icon={faXRay} className="icon"/>
+                                <div className="card-body">
+                                    <h5>Radiology</h5>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     </div>
                     <div className="col-3 g-3">
-                        <div className="card srvcs">
-                            <br />
-                            <FontAwesomeIcon icon={faTruckMedical} className="icon"/>
-                            <div className="card-body">
-                                <h5>Emergency/Acute Care</h5>
+                        <Link to="/emergency" style={{textDecoration: "none"}}>
+                            <div className="card srvcs">
+                                <br />
+                                <FontAwesomeIcon icon={faTruckMedical} className="icon"/>
+                                <div className="card-body">
+                                    <h5>Emergency/Acute Care</h5>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     </div>
                     <div className="col-3 g-3">
-                        <div className="card srvcs">
-                            <br />
-                            <FontAwesomeIcon icon={faHeartPulse} className="icon"/>
-                            <div className="card-body">
-                                <h5>Heart Institute</h5>
+                        <Link to="/heartins" style={{textDecoration: "none"}}>
+                            <div className="card srvcs">
+                                <br />
+                                <FontAwesomeIcon icon={faHeartPulse} className="icon"/>
+                                <div className="card-body">
+                                    <h5>Heart Institute</h5>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     </div>
                     <div className="col-3 g-3">
-                        <div className="card srvcs">
-                            <br />
-                            <FontAwesomeIcon icon={faNotesMedical} className="icon"/>
-                            <div className="card-body">
-                                <h5>Executive Health Unit</h5>
+                        <Link to="/healthunit" style={{textDecoration: "none"}}>
+                            <div className="card srvcs">
+                                <br />
+                                <FontAwesomeIcon icon={faNotesMedical} className="icon"/>
+                                <div className="card-body">
+                                    <h5>Executive Health Unit</h5>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     </div>
                     <div className="col-3 g-3">
-                        <div className="card srvcs">
-                            <br />
-                            <FontAwesomeIcon icon={faHandHoldingMedical} className="icon"/>
-                            <div className="card-body">
-                                <h5>Cancer Center</h5>
+                        <Link to="/cancercent" style={{textDecoration: "none"}}>
+                            <div className="card srvcs">
+                                <br />
+                                <FontAwesomeIcon icon={faHandHoldingMedical} className="icon"/>
+                                <div className="card-body">
+                                    <h5>Cancer Center</h5>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     </div>
                 </div>
             </div>

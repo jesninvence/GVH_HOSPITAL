@@ -2,6 +2,7 @@ import doctors from "../images/pediatirc.avif";
 import doctor1 from "../images/pediatric1.jpg";
 import doctor2 from "../images/doctor12.webp";
 import doctor3 from "../images/doctor9.avif";
+import {Link} from "react-router-dom";
 
 const MeetOurDoctos = () => {
     return ( 
@@ -59,7 +60,9 @@ const MeetOurDoctos = () => {
         <div className="container text-center">
             <div className="row">
                 <div className="col-12">
-                    <button className="more">See All</button>
+                    <Link to="/doctor">
+                        <button className="more">See All</button>
+                    </Link>
                 </div>
             </div>
         </div>

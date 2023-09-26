@@ -16,38 +16,38 @@ const Expertise = () => {
                 </div>
             </div>
             <br />
-            <div className="container text-center">
+            <div className="container">
                 <div className="row">
                     <div className="col-6 g-3">
-                        <div className="card ">
-                            <img src={doctors} alt="" />
-                            <div className="card-body">
-                                <h2>Expert Doctors</h2>
+                        <div className="card">
+                            <img src={doctors} className="card-img" alt="" />
+                            <div className="card-img-overlay">
+                                <h3 className="card-title">Expert Doctors</h3>
                             </div>
                         </div>
                     </div>
                     <br />
                     <div className="col-6 g-3">
                         <div className="card">
-                            <img src={care} alt="" style={{height: "23rem"}}/>
-                            <div className="card-body">
-                                <h2>Emergency and Critical Care</h2>
+                            <img src={care} className="card-img" alt="" style={{height: "23rem"}}/>
+                            <div className="card-img-overlay">
+                                <h3 className="card-title">Emergency and Critical Care</h3>
                             </div>
                         </div>
                     </div>
                     <div className="col-6 g-3">
                         <div className="card">
-                            <img src={facilities} alt="" style={{height: "23rem"}}/>
-                            <div className="card-body">
-                                <h2>State-of-the-art Facilities</h2>
+                            <img src={facilities} className="card-img" alt="" style={{height: "23rem"}}/>
+                            <div className="card-img-overlay">
+                                <h3 className="card-title">State-of-the-art Facilities</h3>
                             </div>
                         </div>
                     </div>
                     <div className="col-6 g-3">
                         <div className="card">
-                            <img src={program} alt="" />
-                            <div className="card-body">
-                                <h2>Training Programs</h2>
+                            <img src={program} className="card-img" alt="" />
+                            <div className="card-img-overlay">
+                                <h3 className="card-title">Training Programs</h3>
                             </div>
                         </div>
                     </div>    
