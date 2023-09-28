@@ -248,9 +248,9 @@ function BookSchedule({next,prev,hmos,virtual_schedule,walkIn_schedule}) {
                                                         <option style={{display:"none"}} selected>Select hmo partner</option>
                                                         {
                                                             hmos.map((insurance,index) => {
-                                                                const {name,id} = insurance;
-                                                                let result = <option value={id}>{name}</option>
-                                                                if (data.get("hmo") == insurance) result = <option selected value={id}>{name}</option>
+                                                                const {hmo_name,hmo_id} = insurance;
+                                                                let result = <option value={hmo_id}>{hmo_name}</option>
+                                                                if (data.get("hmo") == insurance) result = <option selected value={hmo_id}>{hmo_name}</option>
                                                                 return (result);
                                                             })
                                                         }
@@ -399,11 +399,11 @@ function BookDetails({next,prev}) {
                             </div>
                             <div className="form-group">
                                 <label className="mb-1 mt-3">MOBILE NUMBER (Optional) </label> <br/>
-                                <input style={{background:"rgba(0,0,0,0.03)",width:"100%",outline:"none",padding:".7rem",borderRadius:"15px"}}  type="text" name="number"/>
+                                <input style={{background:"rgba(0,0,0,0.03)",width:"100%",outline:"none",padding:".7rem",borderRadius:"15px"}}  type="number" name="number"/>
                             </div>
                             <div className="form-group">
                                 <label className="mb-1 mt-3">E-MAIL</label>
-                                <input style={{background:"rgba(0,0,0,0.03)",width:"100%",outline:"none",padding:".7rem",borderRadius:"15px"}}  type="text" required name="email"/> 
+                                <input style={{background:"rgba(0,0,0,0.03)",width:"100%",outline:"none",padding:".7rem",borderRadius:"15px"}}  type="email" required name="email"/> 
                                 <p>You will need to verify your email id with an OTP (One Time Pin) at the next step.</p>
                             </div>
                             <div className="form-group">

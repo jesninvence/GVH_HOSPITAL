@@ -137,22 +137,22 @@ function UserProfile({inputData,setData,updateCurrent}) {
                     <div className="row">
                         <div className="form-group col">
                             <label>Email ID</label>
-                            <input className="form-control" type="text" name="email" required defaultValue={inputData.get("email")}/>
+                            <input className="form-control" type="email" name="email" required defaultValue={inputData.get("email")}/>
                         </div>
                         <div className="form-group col">
                             <label>Phone Number</label>
-                            <input className="form-control" type="text" name="number" defaultValue={inputData.get("number")}/>
+                            <input className="form-control" type="number" name="number" defaultValue={inputData.get("number")}/>
                         </div>
                     </div>
                     <br/>
                     <div className="row">
                         <div className="form-group col">
                             <label>Password</label>
-                            <input className="form-control" type="text" name="password" required defaultValue={inputData.get("password")}/>
+                            <input className="form-control" type="password" name="password" required defaultValue={inputData.get("password")}/>
                         </div>
                         <div className="form-group col">
                             <label>Confirm Password</label>
-                            <input className="form-control" type="text" name="confirmPassword" required defaultValue={inputData.get("confirmPassword")}/>
+                            <input className="form-control" type="password" name="confirmPassword" required defaultValue={inputData.get("confirmPassword")}/>
                         </div>
                     </div>
                     <br />

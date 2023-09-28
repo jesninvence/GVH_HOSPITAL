@@ -113,7 +113,7 @@ const Login = () => {
                                     <input style={{background:"#B6DFEF",borderRadius:"50px"}} className="py-2 pe-5 ps-4 w-100" type="text" name="email" placeholder="email" required ref={emailInput}/>
                                 </div>
                                 <div style={{width:"17rem"}} className="mb-3">
-                                    <input style={{background:"#B6DFEF",borderRadius:"50px"}} className="py-2 pe-5 ps-4" type="text" name="password" placeholder="password" required ref={passwordInput}/> 
+                                    <input style={{background:"#B6DFEF",borderRadius:"50px"}} className="py-2 pe-5 ps-4" type="password" name="password" placeholder="password" required ref={passwordInput}/> 
                                 </div>
                                 <div className="d-flex justify-content-between" style={{fontSize:".8rem",width:"17rem"}}>
                                     <div style={{color:"gray",display:"flex",alignItems:"center",gap:".3rem"}}>
@@ -137,7 +137,7 @@ const Login = () => {
                                     Please provide the email address that you used when you signed up for your account.
                                 </p>
                                 <div style={{width:"20rem"}} className="mb-4 mt-2">
-                                    <input style={{background:"#B6DFEF",borderRadius:"50px"}} className="py-2 pe-5 ps-4 w-100" type="text" name="email" placeholder="email" />
+                                    <input style={{background:"#B6DFEF",borderRadius:"50px"}} className="py-2 pe-5 ps-4 w-100" type="email" name="email" placeholder="email" />
                                 </div>  
                                 <p style={{color:"#A5A5A5",textAlign:"center",width:"28rem",fontSize:".9rem"}}>
                                     We will send you an email that will allow you to reset your password.
