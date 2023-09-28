@@ -1,8 +1,43 @@
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState , useRef} from "react";
 import { Navigate, Link , useNavigate } from "react-router-dom";
 import { getUserType } from "../../components/GetUser";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserDoctor } from "@fortawesome/free-solid-svg-icons";
+import { faUserGroup } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarCheck } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { Bar } from 'react-chartjs-2';
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBell } from "@fortawesome/free-solid-svg-icons";
 
+// const options = {
+//     responsive: true,
+//     plugins: {
+//         legend: {
+//         position: 'top',
+//         },
+//         title: {
+//         display: true,
+//         text: 'Chart.js Bar Chart',
+//         },
+//     },
+// }
+
+// const labels = ['Patients','Doctors','Appointments','Trash'];
+
+// const data = {
+//     labels,
+//     datasets: [
+//       {
+//         label: 'Dataset 1',
+//         data: labels.map(() => 1),
+//         backgroundColor: 'rgba(255, 99, 132, 0.5)',
+//       },
+//     ],
+// };
 
 function allow_user(user_type,not,callback) {
     
@@ -20,9 +55,114 @@ export const DashMain = () => {
         });
     },[]);
 
+
     return (
         <>
-            <h1>Dashmain Goes Brr.. {userType}</h1>
+        <main className="main-container">
+            <div className="main-title">
+                <h4>DASHBOARD</h4>
+                {/* <h3>DASHBOARD{userType}</h3> */}
+            </div>
+
+            <div className="main-cards">
+
+                <div className="card">
+                    <div className="card-inner">
+                        <h6>DOCTORS</h6>
+                        <span className="material-icons-outlined"><FontAwesomeIcon icon={faUserDoctor} /></span>
+                    </div>
+                    <h5>86</h5>
+                </div>
+
+                <div className="card">
+                    <div className="card-inner">
+                        <h6>PATIENTS</h6>
+                        <span className="material-icons-outlined"><FontAwesomeIcon icon={faUserGroup} /></span>
+                    </div>
+                    <h5>54</h5>
+                </div>
+
+                <div className="card">
+                    <div className="card-inner">
+                        <h6>APPOINTMENTS</h6>
+                        <span className="material-icons-outlined"><FontAwesomeIcon icon={faCalendarCheck} /></span>
+                    </div>
+                    <h5>31</h5>
+                </div>
+
+                <div className="card">
+                    <div className="card-inner">
+                        <h6>TRASH</h6>
+                        <span className="material-icons-outlined"><FontAwesomeIcon icon={faTrashCan} /></span>
+                    </div>
+                    <h5>24</h5>
+                </div>
+
+            </div>
+            <br /><br />
+            <div className="container">
+                <div className="patient-list">
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="card bg-light">
+                                <div className="card-header">
+                                    New Request
+                                    <button type="button" className="btn btn-primary position-relative" style={{left: "1rem"}}>
+                                            <FontAwesomeIcon icon={faBell} />
+                                        <span className="position-absolute top-5 start-95 translate-mdiddle badge rounded-pill bg-danger">
+                                            2
+                                        </span>
+                                        <span className="visually-hidden">unread notification</span>
+                                    </button>
+                                </div>
+                                <div className="card-body">
+                                    <table className="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Patient Name</th>
+                                                <th scope="col">Address</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td scope="row">1</td>
+                                                <td>Elon Musk</td>
+                                                <td>Manila</td>
+                                                <td>09/28/2023</td>
+                                                <td>
+                                                    <button><FontAwesomeIcon icon={faCheck} /></button>
+                                                    <Link to="/patientsprofile">
+                                                        <button style={{backgroundColor: "#2962ff"}}><FontAwesomeIcon icon={faUser} /></button>
+                                                    </Link>
+                                                    <button><FontAwesomeIcon icon={faTrashCan} /></button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tbody>
+                                            <tr>
+                                                <td scope="row">2</td>
+                                                <td>Mark Logan</td>
+                                                <td>Davao</td>
+                                                <td>09/28/2023</td>
+                                                <td>
+                                                    <button><FontAwesomeIcon icon={faCheck} /></button>
+                                                    <button><FontAwesomeIcon icon={faUser} /></button>
+                                                    <button><FontAwesomeIcon icon={faTrashCan} /></button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
         </>
     );
 }
@@ -90,8 +230,8 @@ export const DashAppointments = () => {
     return (
         <>
             <h1>Appointments</h1>
-            <div className="card">
-                <div className="card-body">
+            <div className="card" style={{backgroundColor: "#2e7d32"}}>
+                <div className="card-body text-white">
                     <table className="appoint-tb">
                         <thead>
                             <tr>

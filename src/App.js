@@ -75,6 +75,7 @@ import {DashMain , DashDoctors , DashPatients , DashAppointments , DashQueue , D
 import Book from "./pages/Book";
 import Resetpassword from "./pages/Resetpassword";
 import Loader from "./components/Loader";
+import PatientsProfile from "./pages/PatientsProfile";
 
 function App() {
   return (
@@ -179,6 +180,7 @@ function App() {
         <Route path="/user/logout" element={<DashLogout></DashLogout>}></Route>
         <Route path="/book" element={<Book></Book>}></Route>
         <Route path="/resetpassword" element={<Resetpassword></Resetpassword>}></Route>
+        <Route path="/patientsprofile" element={<PatientsProfile></PatientsProfile>}></Route>
       </Routes>
       {/* <Loader></Loader> */}
     </BrowserRouter>
