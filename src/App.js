@@ -76,6 +76,7 @@ import Book from "./pages/Book";
 import Resetpassword from "./pages/Resetpassword";
 import Loader from "./components/Loader";
 import PatientsProfile from "./pages/PatientsProfile";
+import "flatpickr/dist/themes/material_blue.css";
 
 function App() {
   return (

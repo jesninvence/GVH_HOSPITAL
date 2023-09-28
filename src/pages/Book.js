@@ -1,16 +1,19 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHandshake , faCommentDots , faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faHandshake , faCommentDots , faChevronLeft , faCalendar , faCheck} from "@fortawesome/free-solid-svg-icons";
 import logo from "../images/capstonelogo.png";
 import { Link } from "react-router-dom";
+import Flatpickr from "react-flatpickr";
 
 let data = new FormData();
 data.append("function",1);
 
 const Book = () => {
     const [currForm,setCurrForm] = useState(0);
+
+    const [showSuccessDisplay,setShowSuccessDisplay] = useState("d-none");
 
     const [searchParams] = useSearchParams();
     const doctor_id = searchParams.get("doctor_id");
@@ -29,9 +32,10 @@ const Book = () => {
         axios.post("http://localhost/GVH_PHP/get_doctor.php",request_data) 
         .then(response => {
             if (typeof response.data == "object") {
-                let {firstname,lastname,specialty_id,profile_image,hmos_id,schedule} = response.data;
+                let {firstname,middlename,lastname,specialty_id,profile_image,hmos_id,schedule} = response.data;
                 setDoctorName(firstname + " " + lastname);
                 setDoctorImage(profile_image);
+                data.append("doctor_name",firstname + " " + middlename + " " + lastname);
     
                 (function() {
                     const request_data = new FormData();
@@ -50,6 +54,20 @@ const Book = () => {
                         if (typeof response.data == "object") setDoctorHMOs(response.data);
                     });
                 })();
+
+                (function() {
+                    const request_data = new FormData();
+                    const cru = localStorage.getItem("cru");
+                    request_data.append("id",cru);
+                    request_data.append("function","2");
+                    axios.post("http://localhost/GVH_PHP/get_user.php",request_data)
+                    .then(response => {
+                        if (typeof response.data == "object") {
+                            const {firstname,middlename,lastname} = response.data;
+                            data.append("patient_name",`${firstname} ${middlename} ${lastname}`);
+                        }
+                    });
+                })();
                 
                if (schedule) {
                    let schedule_data = schedule.split(".");
@@ -60,21 +78,23 @@ const Book = () => {
                }
             }
         });
+
     },[]);
 
     function nextForm(formData) {
         for (let [key,value] of formData.entries()) {
             data.set(key,value);
         } 
+
         if (currForm < 2)
             setCurrForm(currForm + 1);
         else {
             axios.post("http://localhost/GVH_PHP/queue.php",data)
             .then(response => {
                 if (response.data == "") {
-                    alert("SUCCESS!");
-                }
-                alert(response.data)
+                   setShowSuccessDisplay("");
+                } else alert("Error!");
+                console.log(response)
             });
         }
         
@@ -86,30 +106,22 @@ const Book = () => {
 
     return (
         <>
-            {/* <div style={{position:"fixed",top:0,left:0,width:"100%",height:"100%",background:"rgba(0,0,0,0.5)",zIndex:9,display:"flex",justifyContent:"center",alignItems:"center"}}>
-                <div style={{width:"30rem",height:"30rem",background:"white",borderRadius:"20px",display:"flex",alignItems:"center",justifyContent:"center"}}>
+            <div className={showSuccessDisplay} style={{position:"fixed",top:0,left:0,width:"100%",height:"100%",background:"rgba(0,0,0,0.5)",zIndex:9,display:"flex",justifyContent:"center",alignItems:"center"}}>
+                <div style={{width:"30rem",height:"30rem",background:"white",borderRadius:"20px",display:"flex",justifyContent:"center"}}>
                     <div className="card h-50" style={{border:"none"}}>
-                        <div className="card-body d-flex justify-content-center">
-                            <div>
-                                <h3>Log your account.</h3>
-                                <form>
-                                    <div>
-                                        <label>Email</label>
-                                        <input type="email" className="form-control" />
-                                    </div>
-                                    <div>
-                                        <label>Password</label>
-                                        <input type="text" className="form-control" />
-                                    </div>
-                                    <div className="text-center bg-primary text-white mt-2" style={{borderRadius:"50px"}}>
-                                        <button className="btn text-white">SUBMIT</button>
-                                    </div>
-                                </form>
+                        <div className="card-body d-flex flex-column align-items-center" style={{marginTop:"5rem"}}>
+                            <div style={{width:"5rem",height:"5rem",fontSize:"1em",background:"#1C9EF9",display:"flex",justifyContent:"center",alignItems:"center",color:"white",fontSize:"2rem",borderRadius:"50%"}}>
+                                <FontAwesomeIcon icon={faCheck} />
                             </div>
+                            <h1 style={{fontWeight:400}}>Success.</h1>
+                            <p>We'll send you a feedback for your request.</p>
+                            <Link to="/user/queue">
+                                <button style={{background:"#1C9EF9",padding:".7rem 2rem",borderRadius:"50px",color:"white"}}>Check Request Status</button>
+                            </Link>
                         </div>
                     </div>
                 </div>
-            </div> */}
+            </div>
             <div className="container-fluid" id="book">
                 <div style={{width:"100%",maxWidth:"800px",margin:"4rem auto"}}>
                     <div className="row w-100">
@@ -294,7 +306,29 @@ function BookSchedule({next,prev,hmos,virtual_schedule,walkIn_schedule}) {
                                     </div>
                                     <div className="form-group">
                                         <label className="my-3">SCHEDULED ON</label> <br/>
-                                        <input style={{background:"rgba(0,0,0,0.03)",width:"100%",outline:"none",padding:".7rem",borderRadius:"15px"}} name="appointment-date" type="text" defaultValue={data.get("appointment-date")} />
+                                        <div style={{background:"rgba(0,0,0,0.03)",padding:".9rem 1rem",fontSize:"1rem",fontWeight:600,borderRadius:"15px"}} className="row">
+                                                <div className="col-1">
+                                                    <FontAwesomeIcon icon={faCalendar} style={{color:"rgb(28, 158, 249)",fontSize:"1.5rem"}}/>
+                                                </div>
+                                                <div className="col-11">     
+                                                    <Flatpickr type="text" className="w-100 h-100" style={{cursor:"pointer",outline:"none"}} name="appointment-date" options={{
+                                                        "altInput" : true,
+                                                        "altFormat" : "F j , Y (D)",
+                                                        "minDate" : "today",
+                                                        "disable" : [
+                                                            function(date) {
+                                                                function format(str) {
+                                                                    let day = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
+                                                                    return day.indexOf(str);
+                                                                }
+                                                                let schedule = walkIn ? walkIn_schedule : virtual_schedule; 
+
+                                                                return !schedule.some(schedule => date.getDay() == format(schedule.trim().split("-")[0].trim()));
+                                                            }
+                                                        ]
+                                                    }}></Flatpickr>
+                                                </div>  
+                                        </div>  
                                     </div>
                                     <div className="form-group">
                                         <label className="my-3">REASON FOR BOOKING/CHIEF COMPLAINT</label><br/>

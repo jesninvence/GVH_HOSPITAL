@@ -27,6 +27,7 @@ const Login = () => {
                 let data = new FormData();
                 data.append("cru",cru);
                 data.append("sc",sc);
+                data.append("function","1");
 
                 axios.post("http://localhost/GVH_PHP/get_user.php",data)
                 .then(response => {
@@ -39,6 +40,7 @@ const Login = () => {
                 let data = new FormData();
                 data.append("cru",ru);
                 data.append("sc",sc);
+                data.append("function",1);
 
                 axios.post("http://localhost/GVH_PHP/get_user.php",data)
                 .then(response => {

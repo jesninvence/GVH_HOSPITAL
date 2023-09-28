@@ -7,6 +7,7 @@ function getData() {
     let data = new FormData();
     data.append("cru",cru);
     data.append("sc",sc);
+    data.append("function","1");
 
     return data;
 }

@@ -70,7 +70,7 @@ const Dashboard = ({content}) => {
                 <NavigationBar></NavigationBar>
                 <div className="row mt-3">
                     <div className="col-2">
-                        <Sidebar sideLink={availableLinks}></Sidebar>
+                        <Sidebar cru={cru} sideLink={availableLinks}></Sidebar>
                     </div>
                     <div className="col-10 border">
                         {content}
@@ -90,6 +90,7 @@ function NavigationBar() {
         let data = new FormData();
         data.append("cru",cru);
         data.append("sc",sc);
+        data.append("function","1");
         axios.post("http://localhost/GVH_PHP/get_user.php",data)
         .then(response => {
             if (typeof response.data == "object") {
@@ -128,24 +129,51 @@ function NavigationBar() {
 
 
 
-function Sidebar({sideLink}) {
+function Sidebar({sideLink,cru}) {
+    const [totalInbox,setTotalInbox] = useState(0);
+
+    useEffect(() => {
+        const data = new FormData();
+        data.append("target","inboxes");
+        data.append("attribute","user_id");
+        data.append("value",cru);
+        data.append("addition"," AND `viewed` = 0");
+
+        axios.post("http://localhost/GVH_PHP/get_total.php",data)
+        .then(response => {
+            if (!isNaN(response.data)) setTotalInbox(response.data);
+        })
+    },[]);
+
     return (
         <>
             <div className="d-flex flex-column sidebar">
                     {
                         sideLink.map( ([name,icon]) =>{
-                                return(
-                                    <Link to={name == "Dashboard" || name == "Profile" ? "/user" : "/user/" + name.toLowerCase() }>
-                                        <div className="row">
-                                            <div className="col-2">
-                                                <FontAwesomeIcon icon={icon} />
-                                            </div>
-                                            <div className="col-10">
-                                                {name}
-                                            </div>
-                                        </div>
-                                </Link>
-                                );
+                                let result = <Link to={name == "Dashboard" || name == "Profile" ? "/user" : "/user/" + name.toLowerCase() }>
+                                                    <div className="row">
+                                                        <div className="col-2">
+                                                            <FontAwesomeIcon icon={icon} />
+                                                        </div>
+                                                        <div className="col-10">
+                                                            {name}
+                                                        </div>
+                                                    </div>
+                                            </Link>
+                                        console.log(totalInbox)
+                                if (name == "Inbox" && totalInbox > 0) {
+                                    result = <Link className="dashSideLink" data-totalInbox={totalInbox} to={name == "Dashboard" || name == "Profile" ? "/user" : "/user/" + name.toLowerCase() }>
+                                                    <div className="row">
+                                                        <div className="col-2">
+                                                            <FontAwesomeIcon icon={icon} />
+                                                        </div>
+                                                        <div className="col-10">
+                                                            {name}
+                                                        </div>
+                                                    </div>
+                                            </Link>
+                                }
+                                return(result);
                         })
                     }
             </div>

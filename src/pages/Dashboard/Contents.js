@@ -13,31 +13,26 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 
-// const options = {
-//     responsive: true,
-//     plugins: {
-//         legend: {
-//         position: 'top',
-//         },
-//         title: {
-//         display: true,
-//         text: 'Chart.js Bar Chart',
-//         },
-//     },
-// }
-
-// const labels = ['Patients','Doctors','Appointments','Trash'];
-
-// const data = {
-//     labels,
-//     datasets: [
-//       {
-//         label: 'Dataset 1',
-//         data: labels.map(() => 1),
-//         backgroundColor: 'rgba(255, 99, 132, 0.5)',
-//       },
-//     ],
-// };
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+  } from 'chart.js';
+  
+  ChartJS.register(
+      CategoryScale,
+      LinearScale,
+      BarElement,
+      Title,
+      Tooltip,
+      Legend
+    );
+  
+  
 
 function allow_user(user_type,not,callback) {
     
@@ -58,114 +53,202 @@ export const DashMain = () => {
 
     return (
         <>
-        <main className="main-container">
-            <div className="main-title">
-                <h4>DASHBOARD</h4>
-                {/* <h3>DASHBOARD{userType}</h3> */}
-            </div>
+            <h1>{userType}</h1>
+            {
+                userType == "Admin" ?
+                    <AdminDashboard></AdminDashboard>
+                                :
+                    <PatientProfile></PatientProfile>
+            }
+        </>
+    );
+}
 
-            <div className="main-cards">
 
-                <div className="card">
-                    <div className="card-inner">
-                        <h6>DOCTORS</h6>
-                        <span className="material-icons-outlined"><FontAwesomeIcon icon={faUserDoctor} /></span>
-                    </div>
-                    <h5>86</h5>
+function PatientProfile() {
+    return(
+        <>
+            
+        </>
+    );
+}
+
+function AdminDashboard() {
+        const [doctorTotal,setDoctorTotal] = useState();
+        const [patientTotal,setPatientTotal] = useState();
+        const [appointmentTotal,setAppointmentTotal] = useState();
+
+        useEffect(() => {
+            (function() {
+                const data = new FormData();
+                data.append("target","users");
+                data.append("attribute","type_id");
+                data.append("value","2");
+                axios.post("http://localhost/GVH_PHP/get_total.php",data)
+                .then(response => {
+                    if (!isNaN(response.data)) setDoctorTotal(response.data);
+                })
+            })();
+            (function() {
+                const data = new FormData();
+                data.append("target","appointments");
+                data.append("attribute","1");
+                data.append("value","1");
+                axios.post("http://localhost/GVH_PHP/get_total.php",data)
+                .then(response => {
+                    console.log("appointments " + response.data)
+                    if (!isNaN(response.data)) setAppointmentTotal(response.data);
+                })
+            })();
+            (function() {
+                const data = new FormData();
+                data.append("target","users");
+                data.append("attribute","type_id");
+                data.append("value","4");
+                axios.post("http://localhost/GVH_PHP/get_total.php",data)
+                .then(response => {
+                    if (!isNaN(response.data)) setPatientTotal(response.data);
+                })
+            })();
+        },[])
+        const options = {
+            responsive: true,
+            plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Chart.js Bar Chart',
+            },
+            },
+        };
+        
+        const labels = ['Doctors','Patients','Appointments','Trash'];
+        
+        const data = {
+            labels,
+            datasets: [
+            {
+                label: 'Data',
+                data: [doctorTotal,patientTotal,appointmentTotal,3],
+                backgroundColor: ["#2962ff","#ff6d00","#2e7d32","#d50000"],
+            }
+            ],
+        };
+        return (
+            <>
+                        
+            <main className="main-container">
+                <div className="main-title">
+                    <h4>DASHBOARD</h4>
+                    {/* <h3>DASHBOARD{userType}</h3> */}
                 </div>
 
-                <div className="card">
-                    <div className="card-inner">
-                        <h6>PATIENTS</h6>
-                        <span className="material-icons-outlined"><FontAwesomeIcon icon={faUserGroup} /></span>
-                    </div>
-                    <h5>54</h5>
-                </div>
+                <div className="main-cards">
 
-                <div className="card">
-                    <div className="card-inner">
-                        <h6>APPOINTMENTS</h6>
-                        <span className="material-icons-outlined"><FontAwesomeIcon icon={faCalendarCheck} /></span>
+                    <div className="card">
+                        <div className="card-inner">
+                            <h6>DOCTORS</h6>
+                            <span className="material-icons-outlined"><FontAwesomeIcon icon={faUserDoctor} /></span>
+                        </div>
+                        <h5>{doctorTotal}</h5>
                     </div>
-                    <h5>31</h5>
-                </div>
 
-                <div className="card">
-                    <div className="card-inner">
-                        <h6>TRASH</h6>
-                        <span className="material-icons-outlined"><FontAwesomeIcon icon={faTrashCan} /></span>
+                    <div className="card">
+                        <div className="card-inner">
+                            <h6>PATIENTS</h6>
+                            <span className="material-icons-outlined"><FontAwesomeIcon icon={faUserGroup} /></span>
+                        </div>
+                        <h5>{patientTotal}</h5>
                     </div>
-                    <h5>24</h5>
-                </div>
 
-            </div>
-            <br /><br />
-            <div className="container">
-                <div className="patient-list">
-                    <div className="row">
-                        <div className="col-12">
-                            <div className="card bg-light">
-                                <div className="card-header">
-                                    New Request
-                                    <button type="button" className="btn btn-primary position-relative" style={{left: "1rem"}}>
-                                            <FontAwesomeIcon icon={faBell} />
-                                        <span className="position-absolute top-5 start-95 translate-mdiddle badge rounded-pill bg-danger">
-                                            2
-                                        </span>
-                                        <span className="visually-hidden">unread notification</span>
-                                    </button>
-                                </div>
-                                <div className="card-body">
-                                    <table className="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">ID</th>
-                                                <th scope="col">Patient Name</th>
-                                                <th scope="col">Address</th>
-                                                <th scope="col">Date</th>
-                                                <th scope="col">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td scope="row">1</td>
-                                                <td>Elon Musk</td>
-                                                <td>Manila</td>
-                                                <td>09/28/2023</td>
-                                                <td>
-                                                    <button><FontAwesomeIcon icon={faCheck} /></button>
-                                                    <Link to="/patientsprofile">
-                                                        <button style={{backgroundColor: "#2962ff"}}><FontAwesomeIcon icon={faUser} /></button>
-                                                    </Link>
-                                                    <button><FontAwesomeIcon icon={faTrashCan} /></button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                        <tbody>
-                                            <tr>
-                                                <td scope="row">2</td>
-                                                <td>Mark Logan</td>
-                                                <td>Davao</td>
-                                                <td>09/28/2023</td>
-                                                <td>
-                                                    <button><FontAwesomeIcon icon={faCheck} /></button>
-                                                    <button><FontAwesomeIcon icon={faUser} /></button>
-                                                    <button><FontAwesomeIcon icon={faTrashCan} /></button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                    <div className="card">
+                        <div className="card-inner">
+                            <h6>APPOINTMENTS</h6>
+                            <span className="material-icons-outlined"><FontAwesomeIcon icon={faCalendarCheck} /></span>
+                        </div>
+                        <h5>{appointmentTotal}</h5>
+                    </div>
+
+                    <div className="card">
+                        <div className="card-inner">
+                            <h6>TRASH</h6>
+                            <span className="material-icons-outlined"><FontAwesomeIcon icon={faTrashCan} /></span>
+                        </div>
+                        <h5>24</h5>
+                    </div>
+
+                </div>
+                <br /><br />
+                <div className="container">
+                    <div className="patient-list">
+                        <div className="row">
+                            <div className="col-12">
+                                <div className="card bg-light">
+                                    <div className="card-header">
+                                        New Request
+                                        <button type="button" className="btn btn-primary position-relative" style={{left: "1rem"}}>
+                                                <FontAwesomeIcon icon={faBell} />
+                                            <span className="position-absolute top-5 start-95 translate-mdiddle badge rounded-pill bg-danger">
+                                                2
+                                            </span>
+                                            <span className="visually-hidden">unread notification</span>
+                                        </button>
+                                    </div>
+                                    <div className="card-body">
+                                        <table className="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col">Patient Name</th>
+                                                    <th scope="col">Address</th>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td scope="row">1</td>
+                                                    <td>Elon Musk</td>
+                                                    <td>Manila</td>
+                                                    <td>09/28/2023</td>
+                                                    <td>
+                                                        <button><FontAwesomeIcon icon={faCheck} /></button>
+                                                        <Link to="/patientsprofile">
+                                                            <button style={{backgroundColor: "#2962ff"}}><FontAwesomeIcon icon={faUser} /></button>
+                                                        </Link>
+                                                        <button><FontAwesomeIcon icon={faTrashCan} /></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody>
+                                                <tr>
+                                                    <td scope="row">2</td>
+                                                    <td>Mark Logan</td>
+                                                    <td>Davao</td>
+                                                    <td>09/28/2023</td>
+                                                    <td>
+                                                        <button><FontAwesomeIcon icon={faCheck} /></button>
+                                                        <button><FontAwesomeIcon icon={faUser} /></button>
+                                                        <button><FontAwesomeIcon icon={faTrashCan} /></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </main>
+            </main>
+            <Bar options={options} data={data}/>
         </>
     );
 }
+
 
 export const DashDoctors = () => {
     const navigate = useNavigate();
@@ -233,20 +316,24 @@ export const DashAppointments = () => {
             <div className="card" style={{backgroundColor: "#2e7d32"}}>
                 <div className="card-body text-white">
                     <table className="appoint-tb">
-                        <thead>
+                    <thead>
                             <tr>
                                 <th>DOCTOR</th>
                                 <th>PATIENT</th>
+                                <th>REASON</th>
+                                <th>HMO</th>
                                 <th>APPOINTED DATE</th>
                             </tr>
                         </thead>                                            
                         <tbody>
                             {appointments.map(appointment => {
-                                let {id,doctor_id,patient_id,appointed_date} = appointment;
+                                let {id,doctor_id,patient_id,doctor_name,patient_name,reason,hmo_name,appointed_date} = appointment;
                                 return (
                                     <tr>
-                                        <td>{doctor_id}</td>
-                                        <td>{patient_id}</td>
+                                        <td>{doctor_name}</td>
+                                        <td>{patient_name}</td>
+                                        <td>{reason}</td>
+                                        <td>{hmo_name}</td>
                                         <td>{appointed_date}</td>
                                         {
                                             actions ?
@@ -285,6 +372,7 @@ export const DashQueue = () => {
             axios.post("http://localhost/GVH_PHP/queue.php",data)
             .then(response => {
                 if (typeof response.data == "object") setQueues(response.data);
+                console.log(response)
             });
         });
 
@@ -325,17 +413,21 @@ export const DashQueue = () => {
                                 <th>DOCTOR</th>
                                 <th>PATIENT</th>
                                 <th>APPOINTED DATE</th>
+                                <th>REASON</th>
+                                <th>HMO</th>
                                 <th>REQUEST DATE</th>
                             </tr>
                         </thead>                                            
                         <tbody>
                             {queues.map(queue => {
-                                let {id,doctor_id,patient_id,appointed_date,request_date} = queue;
+                                let {id,doctor_id,doctor_name,patient_name,patient_id,appointed_date,reason,hmo_id,request_date,hmo_name} = queue;
                                 return (
                                     <tr>
-                                        <td>{doctor_id}</td>
-                                        <td>{patient_id}</td>
+                                        <td>{doctor_name}</td>
+                                        <td>{patient_name}</td>
                                         <td>{appointed_date}</td>
+                                        <td>{reason}</td>
+                                        <td>{hmo_name}</td>
                                         <td>{request_date}</td>     
                                         {
                                             actions ?

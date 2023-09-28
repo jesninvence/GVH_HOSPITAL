@@ -917,3 +917,25 @@
   color: white;
   margin-top: 1rem;
 }
+
+.dashSideLink {
+  position: relative;
+}
+
+.dashSideLink::after {
+  content:attr(data-totalInbox);
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: black;
+  right: 0;
+  top: 0;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: .9rem;
+  font-weight: 600;
+}
