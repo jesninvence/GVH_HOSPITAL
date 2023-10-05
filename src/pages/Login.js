@@ -28,11 +28,12 @@ const Login = () => {
                 data.append("cru",cru);
                 data.append("sc",sc);
 
-                axios.post("http://localhost/GVH_PHP/get_user.php",data)
+                axios.post("https://srv1098-files.hstgr.io/9e79fad429dd6400/files/public_html/GVH_PHP/get_user.php",data)
                 .then(response => {
                     let result = response.data;
                     if (typeof result == "object" && loggedLink.current) {
-                        loggedLink.current.click();
+                        console.log(response.data)
+                      
                     } 
                 });
             } else if (ru) {
@@ -57,7 +58,7 @@ const Login = () => {
         event.preventDefault();
         const data = new FormData(event.target);
         
-        axios.post(`http://localhost/GVH_PHP/login.php`,data)
+        axios.post(`https://srv1098-files.hstgr.io/9e79fad429dd6400/files/public_html/GVH_PHP/login.php`,data)
         .then(response => {
             let result = response.data;
             if (result == "" || !result) {
