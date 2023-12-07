@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Link , useSearchParams} from "react-router-dom";
 import axios from "axios";
 import { useEffect , useState } from "react";
@@ -8,6 +9,18 @@ const Doctors = () => {
     const [specialties,setSpecialties] = useState([]);
     const [params] = useSearchParams();
     
+=======
+import pdtric from "../images/pediatric1.jpg";
+import pdtric1 from "../images/pediatirc.avif";
+import doctor1 from "../images/doctor12.webp";
+import doctor2 from "../images/doctor9.avif";
+import axios from "axios";
+import { useEffect , useState } from "react";
+import { Link } from "react-router-dom";
+
+const Doctors = () => {
+    const [doctors,setDoctors] = useState([]);
+>>>>>>> master
 
     useEffect(() => {
         axios.get("http://localhost/GVH_PHP/get_doctors.php")
@@ -26,6 +39,7 @@ const Doctors = () => {
                     })
                 });
             }
+<<<<<<< HEAD
         })
 
         axios.get("http://localhost/GVH_PHP/get_specialties.php")
@@ -36,6 +50,10 @@ const Doctors = () => {
         });
 
         setLookSpecialty(params.get("specialty"));
+=======
+            
+        })
+>>>>>>> master
     },[]);
 
     return ( 
@@ -125,6 +143,31 @@ const Doctors = () => {
                         </div>
                     </div>
                 </div>
+                {
+                    doctors.map(doctor => {
+                        return (
+                            <div className="row g-0 position-relative">
+                                <div className="col-md-4 mb-md-0">
+                                    <img src={doctor.profile_image} alt="" width="50%"/>
+                                </div>
+                                <div className="col-md-7 p-4 ps-md-0">
+                                    {console.log(doctor,doctor['specialty_name'])}
+                                    <p>{doctor['specialty_name']}</p>
+                                    <p>{doctor.experience} yrs experience</p>
+                                    <p>Site: GVH Medical Hospital</p>
+                                    <button className="book">VIEW PROFILE</button>
+                                    <br />
+                                    <Link to={"/book?doctor_id=" + doctor.doctor_id}>
+                                        <button className="cntct">BOOK</button>
+                                    </Link>
+                                </div>
+                                <div className="col-md-3" style={{backgroundColor: "#1E90FF"}}>
+                                    <h5 className="mt-0 text-center text-white">Dr. {`${doctor.firstname} ${doctor.lastname}`}</h5>
+                                </div>
+                            </div>
+                        );
+                    })
+                }
             </div>
         </>
      );

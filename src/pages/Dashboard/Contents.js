@@ -1,4 +1,5 @@
 import axios from "axios";
+<<<<<<< HEAD
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState , useRef} from "react";
 import { Navigate, Link , useNavigate } from "react-router-dom";
@@ -33,6 +34,12 @@ import {
     );
   
   
+=======
+import { useEffect, useState , useRef} from "react";
+import { Navigate, Link , useNavigate } from "react-router-dom";
+import { getUserType } from "../../components/GetUser";
+
+>>>>>>> master
 
 function allow_user(user_type,not,callback) {
     
@@ -50,6 +57,7 @@ export const DashMain = () => {
         });
     },[]);
 
+<<<<<<< HEAD
 
     return (
         <>
@@ -60,10 +68,16 @@ export const DashMain = () => {
                                 :
                     <PatientProfile></PatientProfile>
             }
+=======
+    return (
+        <>
+            <h1>Dashmain Goes Brr.. {userType}</h1>
+>>>>>>> master
         </>
     );
 }
 
+<<<<<<< HEAD
 
 function PatientProfile() {
     return(
@@ -250,6 +264,8 @@ function AdminDashboard() {
 }
 
 
+=======
+>>>>>>> master
 export const DashDoctors = () => {
     const navigate = useNavigate();
 
@@ -313,6 +329,7 @@ export const DashAppointments = () => {
     return (
         <>
             <h1>Appointments</h1>
+<<<<<<< HEAD
             <div className="card" style={{backgroundColor: "#2e7d32"}}>
                 <div className="card-body text-white">
                     <table className="appoint-tb">
@@ -322,11 +339,21 @@ export const DashAppointments = () => {
                                 <th>PATIENT</th>
                                 <th>REASON</th>
                                 <th>HMO</th>
+=======
+            <div className="card">
+                <div className="card-body">
+                    <table className="appoint-tb">
+                        <thead>
+                            <tr>
+                                <th>DOCTOR</th>
+                                <th>PATIENT</th>
+>>>>>>> master
                                 <th>APPOINTED DATE</th>
                             </tr>
                         </thead>                                            
                         <tbody>
                             {appointments.map(appointment => {
+<<<<<<< HEAD
                                 let {id,doctor_id,patient_id,doctor_name,patient_name,reason,hmo_name,appointed_date} = appointment;
                                 return (
                                     <tr>
@@ -334,6 +361,13 @@ export const DashAppointments = () => {
                                         <td>{patient_name}</td>
                                         <td>{reason}</td>
                                         <td>{hmo_name}</td>
+=======
+                                let {id,doctor_id,patient_id,appointed_date} = appointment;
+                                return (
+                                    <tr>
+                                        <td>{doctor_id}</td>
+                                        <td>{patient_id}</td>
+>>>>>>> master
                                         <td>{appointed_date}</td>
                                         {
                                             actions ?
@@ -372,7 +406,10 @@ export const DashQueue = () => {
             axios.post("http://localhost/GVH_PHP/queue.php",data)
             .then(response => {
                 if (typeof response.data == "object") setQueues(response.data);
+<<<<<<< HEAD
                 console.log(response)
+=======
+>>>>>>> master
             });
         });
 
@@ -413,13 +450,17 @@ export const DashQueue = () => {
                                 <th>DOCTOR</th>
                                 <th>PATIENT</th>
                                 <th>APPOINTED DATE</th>
+<<<<<<< HEAD
                                 <th>REASON</th>
                                 <th>HMO</th>
+=======
+>>>>>>> master
                                 <th>REQUEST DATE</th>
                             </tr>
                         </thead>                                            
                         <tbody>
                             {queues.map(queue => {
+<<<<<<< HEAD
                                 let {id,doctor_id,doctor_name,patient_name,patient_id,appointed_date,reason,hmo_id,request_date,hmo_name} = queue;
                                 return (
                                     <tr>
@@ -428,6 +469,14 @@ export const DashQueue = () => {
                                         <td>{appointed_date}</td>
                                         <td>{reason}</td>
                                         <td>{hmo_name}</td>
+=======
+                                let {id,doctor_id,patient_id,appointed_date,request_date} = queue;
+                                return (
+                                    <tr>
+                                        <td>{doctor_id}</td>
+                                        <td>{patient_id}</td>
+                                        <td>{appointed_date}</td>
+>>>>>>> master
                                         <td>{request_date}</td>     
                                         {
                                             actions ?

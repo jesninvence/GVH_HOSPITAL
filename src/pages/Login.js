@@ -27,6 +27,7 @@ const Login = () => {
                 let data = new FormData();
                 data.append("cru",cru);
                 data.append("sc",sc);
+<<<<<<< HEAD
                 data.append("function","1");
 
                 axios.post("http://localhost/GVH_PHP/get_user.php",data)
@@ -34,13 +35,25 @@ const Login = () => {
                     let result = response.data;
                     if (typeof result == "object" && loggedLink.current) {
                         loggedLink.current.click();
+=======
+
+                axios.post("https://srv1098-files.hstgr.io/9e79fad429dd6400/files/public_html/GVH_PHP/get_user.php",data)
+                .then(response => {
+                    let result = response.data;
+                    if (typeof result == "object" && loggedLink.current) {
+                        console.log(response.data)
+                      
+>>>>>>> master
                     } 
                 });
             } else if (ru) {
                 let data = new FormData();
                 data.append("cru",ru);
                 data.append("sc",sc);
+<<<<<<< HEAD
                 data.append("function",1);
+=======
+>>>>>>> master
 
                 axios.post("http://localhost/GVH_PHP/get_user.php",data)
                 .then(response => {
@@ -59,7 +72,7 @@ const Login = () => {
         event.preventDefault();
         const data = new FormData(event.target);
         
-        axios.post(`http://localhost/GVH_PHP/login.php`,data)
+        axios.post(`https://srv1098-files.hstgr.io/9e79fad429dd6400/files/public_html/GVH_PHP/login.php`,data)
         .then(response => {
             let result = response.data;
             if (result == "" || !result) {
@@ -113,7 +126,11 @@ const Login = () => {
                                     <input style={{background:"#B6DFEF",borderRadius:"50px"}} className="py-2 pe-5 ps-4 w-100" type="text" name="email" placeholder="email" required ref={emailInput}/>
                                 </div>
                                 <div style={{width:"17rem"}} className="mb-3">
+<<<<<<< HEAD
                                     <input style={{background:"#B6DFEF",borderRadius:"50px"}} className="py-2 pe-5 ps-4" type="password" name="password" placeholder="password" required ref={passwordInput}/> 
+=======
+                                    <input style={{background:"#B6DFEF",borderRadius:"50px"}} className="py-2 pe-5 ps-4" type="text" name="password" placeholder="password" required ref={passwordInput}/> 
+>>>>>>> master
                                 </div>
                                 <div className="d-flex justify-content-between" style={{fontSize:".8rem",width:"17rem"}}>
                                     <div style={{color:"gray",display:"flex",alignItems:"center",gap:".3rem"}}>
@@ -137,7 +154,11 @@ const Login = () => {
                                     Please provide the email address that you used when you signed up for your account.
                                 </p>
                                 <div style={{width:"20rem"}} className="mb-4 mt-2">
+<<<<<<< HEAD
                                     <input style={{background:"#B6DFEF",borderRadius:"50px"}} className="py-2 pe-5 ps-4 w-100" type="email" name="email" placeholder="email" />
+=======
+                                    <input style={{background:"#B6DFEF",borderRadius:"50px"}} className="py-2 pe-5 ps-4 w-100" type="text" name="email" placeholder="email" />
+>>>>>>> master
                                 </div>  
                                 <p style={{color:"#A5A5A5",textAlign:"center",width:"28rem",fontSize:".9rem"}}>
                                     We will send you an email that will allow you to reset your password.

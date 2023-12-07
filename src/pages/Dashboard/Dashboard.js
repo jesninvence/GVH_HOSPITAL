@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 import { useEffect, useRef , useState } from "react";
 import axios from "axios";
 import { getUserType } from "../../components/GetUser";
+<<<<<<< HEAD
 import logo from "../../images/capstonelogo.png";
+=======
+>>>>>>> master
 
 
 const Dashboard = ({content}) => {
@@ -70,7 +73,11 @@ const Dashboard = ({content}) => {
                 <NavigationBar></NavigationBar>
                 <div className="row mt-3">
                     <div className="col-2">
+<<<<<<< HEAD
                         <Sidebar cru={cru} sideLink={availableLinks}></Sidebar>
+=======
+                        <Sidebar sideLink={availableLinks}></Sidebar>
+>>>>>>> master
                     </div>
                     <div className="col-10 border">
                         {content}
@@ -90,7 +97,10 @@ function NavigationBar() {
         let data = new FormData();
         data.append("cru",cru);
         data.append("sc",sc);
+<<<<<<< HEAD
         data.append("function","1");
+=======
+>>>>>>> master
         axios.post("http://localhost/GVH_PHP/get_user.php",data)
         .then(response => {
             if (typeof response.data == "object") {
@@ -102,11 +112,15 @@ function NavigationBar() {
         <>
             <div className="d-flex justify-content-between py-4">
                 <div className="d-flex gap-5 align-items-center">
+<<<<<<< HEAD
                 <section className="logo">
                     <Link to="/">
                         <img src={logo} alt="" width="100px" />
                     </Link>
                 </section>
+=======
+                    <a style={{background:"blue",padding:".5rem 1rem"}} href="#">LOGO</a>
+>>>>>>> master
                     <Link className="btn btn-primary" to="/">Landing Page</Link>
                     <div>Application</div>
                 </div>
@@ -129,6 +143,7 @@ function NavigationBar() {
 
 
 
+<<<<<<< HEAD
 function Sidebar({sideLink,cru}) {
     const [totalInbox,setTotalInbox] = useState(0);
 
@@ -145,11 +160,15 @@ function Sidebar({sideLink,cru}) {
         })
     },[]);
 
+=======
+function Sidebar({sideLink}) {
+>>>>>>> master
     return (
         <>
             <div className="d-flex flex-column sidebar">
                     {
                         sideLink.map( ([name,icon]) =>{
+<<<<<<< HEAD
                                 let result = <Link to={name == "Dashboard" || name == "Profile" ? "/user" : "/user/" + name.toLowerCase() }>
                                                     <div className="row">
                                                         <div className="col-2">
@@ -174,6 +193,20 @@ function Sidebar({sideLink,cru}) {
                                             </Link>
                                 }
                                 return(result);
+=======
+                                return(
+                                    <Link to={name == "Dashboard" || name == "Profile" ? "/user" : "/user/" + name.toLowerCase() }>
+                                        <div className="row">
+                                            <div className="col-2">
+                                                <FontAwesomeIcon icon={icon} />
+                                            </div>
+                                            <div className="col-10">
+                                                {name}
+                                            </div>
+                                        </div>
+                                </Link>
+                                );
+>>>>>>> master
                         })
                     }
             </div>

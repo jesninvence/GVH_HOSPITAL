@@ -40,7 +40,11 @@ const Header = () => {
                             {
                                 specialties.map(specialty => {
                                     return (
+<<<<<<< HEAD
                                         <Link to={`/doctor?specialty=${specialty.id}`}>{specialty.name}</Link>
+=======
+                                        <Link to={`/doctor?specialty=${specialty.name}`}>{specialty.name}</Link>
+>>>>>>> master
                                     )
                                 })
                             }

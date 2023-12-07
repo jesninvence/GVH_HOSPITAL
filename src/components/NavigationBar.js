@@ -4,7 +4,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {React, useState , useEffect} from 'react';
 import {Link} from "react-router-dom";
 import axios from "axios";
+<<<<<<< HEAD
 import logo from "../images/capstonelogo.png";
+=======
+>>>>>>> master
 
 const NavigationBar = () => {
     let [logged,setLogged] = useState(false);
@@ -19,7 +22,10 @@ const NavigationBar = () => {
                 let data = new FormData();
                 data.append("cru",cru);
                 data.append("sc",sc);
+<<<<<<< HEAD
                 data.append("function",1);
+=======
+>>>>>>> master
 
                 axios.post("http://localhost/GVH_PHP/get_user.php",data)
                 .then(response => {
@@ -38,12 +44,17 @@ const NavigationBar = () => {
     return ( 
         <>
             <nav className="navbar navbar-expand-lg bg-white sticky-bottom">
+<<<<<<< HEAD
                 <div className="container-fluid d-flex">
+=======
+                <div className="container-fluid px-5">
+>>>>>>> master
                     <section className="logo">
                         <Link to="/">
                             <img src={logo} alt="" width="100px" />
                         </Link>
                     </section>
+<<<<<<< HEAD
                     <div>
                         <ul className="navbar-nav text-center" id="snd-nav">
                             <Link to="/" style={{textDecoration: "none"}}>
@@ -131,6 +142,46 @@ const NavigationBar = () => {
                                         </Link>
                                     </>
                             }   
+=======
+                    <ul className="navbar-nav text-center">
+                        <li className="nav-item">
+                            <Link className="nav-link text-black md" to="/">
+                                Home
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link text-black" href="">Services</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link text-black" href="">Doctors</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link text-black" href="">Operation</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link text-black" href="">About Us</a>
+                        </li>
+                    </ul>
+                    <div>
+                        {
+                            logged ? 
+                                <Link to="/user" className="d-flex align-items-center gap-2 ">
+                                    <p className="m-0">Hello , {name}!</p>
+                                    <div style={{display:"inline-block",width:"2.5rem",height:"2.5rem",border:"1px solid gray",borderRadius:"50%",overflow:"hidden"}}>
+                                        <img src={profileImage} />
+                                    </div>
+                                </Link>
+                                :
+                                <>
+                                    <Link to="/signup">
+                                        <button className="sgnup">Sign-up</button>
+                                    </Link>
+                                    <Link to="/login">
+                                        <button className="sgnup" style={{background:"white",color:"blue",border:"2px solid blue"}}>Log-in</button>
+                                    </Link>
+                                </>
+                        }   
+>>>>>>> master
                     </div>
                 </div>
             </nav>

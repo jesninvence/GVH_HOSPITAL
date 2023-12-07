@@ -1,4 +1,5 @@
 import axios from "axios";
+<<<<<<< HEAD
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,6 +7,12 @@ import { faHandshake , faCommentDots , faChevronLeft , faCalendar , faCheck} fro
 import logo from "../images/capstonelogo.png";
 import { Link } from "react-router-dom";
 import Flatpickr from "react-flatpickr";
+=======
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHandshake , faCommentDots , faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+>>>>>>> master
 
 let data = new FormData();
 data.append("function",1);
@@ -13,8 +20,11 @@ data.append("function",1);
 const Book = () => {
     const [currForm,setCurrForm] = useState(0);
 
+<<<<<<< HEAD
     const [showSuccessDisplay,setShowSuccessDisplay] = useState("d-none");
 
+=======
+>>>>>>> master
     const [searchParams] = useSearchParams();
     const doctor_id = searchParams.get("doctor_id");
     const request_data = new FormData();
@@ -32,10 +42,16 @@ const Book = () => {
         axios.post("http://localhost/GVH_PHP/get_doctor.php",request_data) 
         .then(response => {
             if (typeof response.data == "object") {
+<<<<<<< HEAD
                 let {firstname,middlename,lastname,specialty_id,profile_image,hmos_id,schedule} = response.data;
                 setDoctorName(firstname + " " + lastname);
                 setDoctorImage(profile_image);
                 data.append("doctor_name",firstname + " " + middlename + " " + lastname);
+=======
+                let {firstname,lastname,specialty_id,profile_image,hmos_id,schedule} = response.data;
+                setDoctorName(firstname + " " + lastname);
+                setDoctorImage(profile_image);
+>>>>>>> master
     
                 (function() {
                     const request_data = new FormData();
@@ -54,6 +70,7 @@ const Book = () => {
                         if (typeof response.data == "object") setDoctorHMOs(response.data);
                     });
                 })();
+<<<<<<< HEAD
 
                 (function() {
                     const request_data = new FormData();
@@ -79,22 +96,41 @@ const Book = () => {
             }
         });
 
+=======
+                
+               let schedule_data = schedule.split(".");
+               let virtual = schedule_data[0].split(",");
+               let walkIn = schedule_data[1].split(",");
+               setDoctorVirtualSchedule(virtual);
+               setDoctorWalkInSchedule(walkIn);
+            }
+        });
+>>>>>>> master
     },[]);
 
     function nextForm(formData) {
         for (let [key,value] of formData.entries()) {
             data.set(key,value);
         } 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
         if (currForm < 2)
             setCurrForm(currForm + 1);
         else {
             axios.post("http://localhost/GVH_PHP/queue.php",data)
             .then(response => {
                 if (response.data == "") {
+<<<<<<< HEAD
                    setShowSuccessDisplay("");
                 } else alert("Error!");
                 console.log(response)
+=======
+                    alert("SUCCESS!");
+                }
+                
+>>>>>>> master
             });
         }
         
@@ -106,6 +142,7 @@ const Book = () => {
 
     return (
         <>
+<<<<<<< HEAD
             <div className={showSuccessDisplay} style={{position:"fixed",top:0,left:0,width:"100%",height:"100%",background:"rgba(0,0,0,0.5)",zIndex:9,display:"flex",justifyContent:"center",alignItems:"center"}}>
                 <div style={{width:"30rem",height:"30rem",background:"white",borderRadius:"20px",display:"flex",justifyContent:"center"}}>
                     <div className="card h-50" style={{border:"none"}}>
@@ -118,6 +155,28 @@ const Book = () => {
                             <Link to="/user/queue">
                                 <button style={{background:"#1C9EF9",padding:".7rem 2rem",borderRadius:"50px",color:"white"}}>Check Request Status</button>
                             </Link>
+=======
+            <div style={{position:"fixed",top:0,left:0,width:"100%",height:"100%",background:"rgba(0,0,0,0.5)",zIndex:9,display:"flex",justifyContent:"center",alignItems:"center"}}>
+                <div style={{width:"30rem",height:"30rem",background:"white",borderRadius:"20px",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                    <div className="card h-50" style={{border:"none"}}>
+                        <div className="card-body d-flex justify-content-center">
+                            <div>
+                                <h3>Log your account.</h3>
+                                <form>
+                                    <div>
+                                        <label>Email</label>
+                                        <input type="email" className="form-control" />
+                                    </div>
+                                    <div>
+                                        <label>Password</label>
+                                        <input type="text" className="form-control" />
+                                    </div>
+                                    <div className="text-center bg-primary text-white mt-2" style={{borderRadius:"50px"}}>
+                                        <button className="btn text-white">SUBMIT</button>
+                                    </div>
+                                </form>
+                            </div>
+>>>>>>> master
                         </div>
                     </div>
                 </div>
@@ -126,11 +185,15 @@ const Book = () => {
                 <div style={{width:"100%",maxWidth:"800px",margin:"4rem auto"}}>
                     <div className="row w-100">
                         <div className="col-5 d-flex flex-column align-items-center">
+<<<<<<< HEAD
                             <section className="logo">
                                 <Link to="/">
                                     <img src={logo} alt="" width="100px" />
                                 </Link>
                             </section>
+=======
+                            <a style={{display:"inline-block",width:"5rem",background:"blue",padding:"1.5rem 5rem"}}>LOGO</a>
+>>>>>>> master
                             <div style={{marginTop:"6rem",display:"flex",flexDirection:"column",alignItems:'center'}}> 
                                 <div style={{width:"11rem",height:"11rem",borderRadius:"50%",overflow:"hidden"}}>
                                     <img src={doctorImage} className="img-fluid"/>
@@ -248,9 +311,15 @@ function BookSchedule({next,prev,hmos,virtual_schedule,walkIn_schedule}) {
                                                         <option style={{display:"none"}} selected>Select hmo partner</option>
                                                         {
                                                             hmos.map((insurance,index) => {
+<<<<<<< HEAD
                                                                 const {hmo_name,hmo_id} = insurance;
                                                                 let result = <option value={hmo_id}>{hmo_name}</option>
                                                                 if (data.get("hmo") == insurance) result = <option selected value={hmo_id}>{hmo_name}</option>
+=======
+                                                                const {name,id} = insurance;
+                                                                let result = <option value={id}>{name}</option>
+                                                                if (data.get("hmo") == insurance) result = <option selected value={id}>{name}</option>
+>>>>>>> master
                                                                 return (result);
                                                             })
                                                         }
@@ -306,6 +375,7 @@ function BookSchedule({next,prev,hmos,virtual_schedule,walkIn_schedule}) {
                                     </div>
                                     <div className="form-group">
                                         <label className="my-3">SCHEDULED ON</label> <br/>
+<<<<<<< HEAD
                                         <div style={{background:"rgba(0,0,0,0.03)",padding:".9rem 1rem",fontSize:"1rem",fontWeight:600,borderRadius:"15px"}} className="row">
                                                 <div className="col-1">
                                                     <FontAwesomeIcon icon={faCalendar} style={{color:"rgb(28, 158, 249)",fontSize:"1.5rem"}}/>
@@ -329,6 +399,9 @@ function BookSchedule({next,prev,hmos,virtual_schedule,walkIn_schedule}) {
                                                     }}></Flatpickr>
                                                 </div>  
                                         </div>  
+=======
+                                        <input style={{background:"rgba(0,0,0,0.03)",width:"100%",outline:"none",padding:".7rem",borderRadius:"15px"}} name="appointment-date" type="text" defaultValue={data.get("appointment-date")} />
+>>>>>>> master
                                     </div>
                                     <div className="form-group">
                                         <label className="my-3">REASON FOR BOOKING/CHIEF COMPLAINT</label><br/>
@@ -399,11 +472,19 @@ function BookDetails({next,prev}) {
                             </div>
                             <div className="form-group">
                                 <label className="mb-1 mt-3">MOBILE NUMBER (Optional) </label> <br/>
+<<<<<<< HEAD
                                 <input style={{background:"rgba(0,0,0,0.03)",width:"100%",outline:"none",padding:".7rem",borderRadius:"15px"}}  type="number" name="number"/>
                             </div>
                             <div className="form-group">
                                 <label className="mb-1 mt-3">E-MAIL</label>
                                 <input style={{background:"rgba(0,0,0,0.03)",width:"100%",outline:"none",padding:".7rem",borderRadius:"15px"}}  type="email" required name="email"/> 
+=======
+                                <input style={{background:"rgba(0,0,0,0.03)",width:"100%",outline:"none",padding:".7rem",borderRadius:"15px"}}  type="text" name="number"/>
+                            </div>
+                            <div className="form-group">
+                                <label className="mb-1 mt-3">E-MAIL</label>
+                                <input style={{background:"rgba(0,0,0,0.03)",width:"100%",outline:"none",padding:".7rem",borderRadius:"15px"}}  type="text" required name="email"/> 
+>>>>>>> master
                                 <p>You will need to verify your email id with an OTP (One Time Pin) at the next step.</p>
                             </div>
                             <div className="form-group">

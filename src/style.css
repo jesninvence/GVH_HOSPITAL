@@ -63,6 +63,38 @@
   text-align: left;
 }
 
+  .header .searchBar {
+    position: relative;
+  }
+
+  .header .searchBar input {
+    border-radius: 10px;
+  }
+
+  .header .searchBar input:focus ~ div.search-result{
+    display: flex;
+  }
+
+  .header .searchBar .search-result {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 20rem;
+    overflow:scroll;
+    background-color: white;
+    border-radius: 10px;
+  }
+
+  .header .searchBar .search-result a {
+    padding: 1rem;
+    font-size: 1.2rem;
+    border-bottom: 1px solid gray;
+    text-decoration: none;
+    text-align: left;
+  }
+
 
 .sgnup {
   background-color: #1E90FF;
@@ -402,7 +434,7 @@
 
 }
 
-#signin {
+#signin,#login {
   font-family: 'Poppins',sans-serif;
 }
 
@@ -425,6 +457,7 @@
   appearance: none;
   position: relative;
   color: inherit;
+  border: 1px solid gray;
 }
 
 #signin form .selects > div {
@@ -478,6 +511,7 @@
   padding: 2rem 0;
 }
 
+<<<<<<< HEAD
 /****************Doctors.js*******************/
 
 .container .fndDoctors input {
@@ -650,6 +684,8 @@
   padding: 2rem 0;
 }
 
+=======
+>>>>>>> master
 #login input {
   outline: none;
 }
@@ -774,6 +810,7 @@
     50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
     75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
     100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
+<<<<<<< HEAD
 }
 
 /***************Contents.js********************/
@@ -938,4 +975,6 @@
   align-items: center;
   font-size: .9rem;
   font-weight: 600;
+=======
+>>>>>>> master
 }

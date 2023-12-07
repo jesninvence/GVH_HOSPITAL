@@ -7,7 +7,10 @@ function getData() {
     let data = new FormData();
     data.append("cru",cru);
     data.append("sc",sc);
+<<<<<<< HEAD
     data.append("function","1");
+=======
+>>>>>>> master
 
     return data;
 }

@@ -10,6 +10,7 @@ import Info from "./components/Info";
 import Footer from "./components/Footer";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+<<<<<<< HEAD
 import Doctors from "./pages/Doctors";
 import Profile1 from "./pages/Profile1";
 import HospitalService from "./pages/HospitalService";
@@ -70,19 +71,27 @@ import Midwife from "./pages/Midwife";
 import BusinessPis from "./pages/BusinessPis";
 import Doctors2 from "./pages/Doctors2";
 import { BrowserRouter, Routes, Route , Navigate} from "react-router-dom";
+=======
+import { BrowserRouter, Routes, Route , Navigate} from "react-router-dom";
+import Doctors from "./pages/Doctors";
+>>>>>>> master
 import Dashboard from "./pages/Dashboard/Dashboard";
 import {DashMain , DashDoctors , DashPatients , DashAppointments , DashQueue , DashPharmacy , DashInventory , DashLaboratory , DashInbox , DashChat , DashLogout , DashDoctorAdd} from "./pages/Dashboard/Contents";
 import Book from "./pages/Book";
 import Resetpassword from "./pages/Resetpassword";
 import Loader from "./components/Loader";
+<<<<<<< HEAD
 import PatientsProfile from "./pages/PatientsProfile";
 import "flatpickr/dist/themes/material_blue.css";
+=======
+>>>>>>> master
 
 function App() {
   return (
     <>
     <BrowserRouter>
       <Routes>
+<<<<<<< HEAD
         <Route path="/drservices" element={<> <NavigationBar></NavigationBar><HospitalService></HospitalService><Footer></Footer></>}></Route>
         <Route path="/doctor" element={<> <NavigationBar></NavigationBar><Doctors></Doctors><Footer></Footer></>}></Route>
         <Route path="/laboratory" element={<> <NavigationBar></NavigationBar><Laboratory></Laboratory><Footer></Footer></>}></Route>
@@ -141,6 +150,15 @@ function App() {
         <Route path="/midwife" element={<> <NavigationBar></NavigationBar><Midwife></Midwife><Footer></Footer></>}></Route>
         <Route path="/bpis" element={<> <NavigationBar></NavigationBar><BusinessPis></BusinessPis><Footer></Footer></>}></Route>
         <Route path="/doctors2" element={<> <NavigationBar></NavigationBar><Doctors2></Doctors2><Footer></Footer></>}></Route>
+=======
+        <Route path="/doctor" element={
+          <> 
+          <NavigationBar></NavigationBar>
+          <Doctors></Doctors>
+          <Footer></Footer>
+        </>
+        }></Route>
+>>>>>>> master
         <Route path="/" element={
           <>
              <NavigationBar></NavigationBar>
@@ -150,7 +168,11 @@ function App() {
             <MeetOurDoctos></MeetOurDoctos>
             <AboutUs></AboutUs>
             <Info></Info>
+<<<<<<< HEAD
             <Footer></Footer>
+=======
+            <Footer></Footer>            
+>>>>>>> master
           </>
         }></Route>
         <Route path="/signup" element={
@@ -181,11 +203,13 @@ function App() {
         <Route path="/user/logout" element={<DashLogout></DashLogout>}></Route>
         <Route path="/book" element={<Book></Book>}></Route>
         <Route path="/resetpassword" element={<Resetpassword></Resetpassword>}></Route>
+<<<<<<< HEAD
         <Route path="/patientsprofile" element={<PatientsProfile></PatientsProfile>}></Route>
+=======
+>>>>>>> master
       </Routes>
       {/* <Loader></Loader> */}
     </BrowserRouter>
-    
     </>
   );
 }
